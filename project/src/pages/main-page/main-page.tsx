@@ -6,7 +6,7 @@ type MainPageProps = {
 
 function MainPage({ placesCount }: MainPageProps): JSX.Element {
   return (
-    <div>
+    <div className="page--main">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

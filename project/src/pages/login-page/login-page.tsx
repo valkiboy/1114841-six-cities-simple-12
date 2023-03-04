@@ -1,6 +1,6 @@
 function LoginPage(): JSX.Element {
   return (
-    <div>
+    <>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -38,7 +38,7 @@ function LoginPage(): JSX.Element {
           </section>
         </div>
       </main>
-    </div>
+    </>
   );
 }
 

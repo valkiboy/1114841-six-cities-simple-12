@@ -1,6 +1,6 @@
-// import MainPage from '../../pages/main/main-page';
+import MainPage from '../../pages/main/main-page';
 // import RoomPage from '../../pages/room/room-page';
-import LoginPage from '../../pages/login/login-page';
+// import LoginPage from '../../pages/login/login-page';
 
 type AppPageProps = {
   placesCount: number;
@@ -8,9 +8,9 @@ type AppPageProps = {
 
 function App({placesCount}:AppPageProps): JSX.Element {
   return (
-    // <MainPage placesCount={placesCount}/>
+    <MainPage placesCount={placesCount}/>
     // <RoomPage />
-    <LoginPage />
+    // <LoginPage />
   );
 }
 

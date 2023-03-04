@@ -4,7 +4,7 @@ type MainPageProps = {
   placesCount: number;
 }
 
-function MainPage({placesCount}:MainPageProps): JSX.Element {
+function MainPage({ placesCount }: MainPageProps): JSX.Element {
   return (
     <div>
       <header className="header">

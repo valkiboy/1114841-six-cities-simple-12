@@ -30,4 +30,5 @@ function PlaceCard (): JSX.Element {
     </article>
   );
 }
+
 export default PlaceCard;

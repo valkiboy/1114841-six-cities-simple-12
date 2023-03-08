@@ -1,3 +1,6 @@
+import { Helmet } from 'react-helmet-async';
+import Logo from '../../components/logo/logo';
+
 function LoginPage(): JSX.Element {
   return (
     <>
@@ -5,15 +8,16 @@ function LoginPage(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
+              <Logo />
             </div>
           </div>
         </div>
       </header>
 
       <main className="page__main page__main--login">
+        <Helmet>
+          <title>six cities simple: authorization</title>
+        </Helmet>
         <div className="page__login-container container">
           <section className="login">
             <h1 className="login__title">Sign in</h1>

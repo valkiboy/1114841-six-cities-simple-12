@@ -1,21 +1,32 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
-import { Place } from '../../types/place';
-import { Reviews } from '../../types/place';
+import { Offer } from '../../types/offer';
+import { Reviews } from '../../types/offer';
 import ReviewForm from '../../components/review-form/review-form';
+import NotFoundPage from '../../pages/not-found-page/not-found-page';
+import PropertyFoto from '../../components/property-foto/property-foto';
+import PropertyItem from '../../components/propery-item/property-item';
 
 type RoomPageProps = {
   reviews: Reviews[];
-  apartments: Place[];
+  apartments: Offer[];
 }
 
 function RoomPage({ reviews, apartments }: RoomPageProps): JSX.Element {
   const idRoom = useParams();
-  // const property = apartments.find((apartment) => apartment.id.toString === idRoom);
-  // const propertyReview = reviews.find((review) => review.id === idRoom);
-  // console.log('property', property)
-  // console.log('propertyReview', propertyReview)
+  const property = apartments.find((apartment) => String(apartment.id) === String(idRoom.id));
+
+
+  if (property === undefined) {
+    return <NotFoundPage />;
+  }
+
+  const changeRating = `${Math.round(property.rating) / 0.05}%`;
+  const host = property.host;
+  const items: string[] = property.items;
+  const fotos: string[] = property.src;
+
   return (
     <>
       <header className="header">
@@ -50,24 +61,11 @@ function RoomPage({ reviews, apartments }: RoomPageProps): JSX.Element {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/room.jpg" alt="studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-02.jpg" alt="studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-03.jpg" alt="studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/studio-01.jpg" alt="studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="studio" />
-              </div>
+
+              {fotos.map((foto, index) => (
+                <PropertyFoto key={String(foto) + String(index)} foto={foto} />
+              ))}
+
             </div>
           </div>
           <div className="property__container container">
@@ -77,74 +75,57 @@ function RoomPage({ reviews, apartments }: RoomPageProps): JSX.Element {
               </div>
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  Beautiful &amp; luxurious studio at great location
+
+                  {property.title}
+
                 </h1>
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: '80%' }}></span>
+                  <span style={{ width: changeRating }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">4.8</span>
+                <span className="property__rating-value rating__value">{property.rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  Apartment
+
+                  {property.type}
+
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  3 Bedrooms
+
+                  {property.bedrooms} {property.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
+
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max 4 adults
+
+                  {property.guests > 1 ? `Max ${property.guests} adults` : `Max ${property.guests} adult`}
+
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;120</b>
+                <b className="property__price-value">&euro;{property.price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  <li className="property__inside-item">
-                    Wi-Fi
-                  </li>
-                  <li className="property__inside-item">
-                    Washing machine
-                  </li>
-                  <li className="property__inside-item">
-                    Towels
-                  </li>
-                  <li className="property__inside-item">
-                    Heating
-                  </li>
-                  <li className="property__inside-item">
-                    Coffee machine
-                  </li>
-                  <li className="property__inside-item">
-                    Baby seat
-                  </li>
-                  <li className="property__inside-item">
-                    Kitchen
-                  </li>
-                  <li className="property__inside-item">
-                    Dishwasher
-                  </li>
-                  <li className="property__inside-item">
-                    Cabel TV
-                  </li>
-                  <li className="property__inside-item">
-                    Fridge
-                  </li>
+
+                  {items.map((item, index) => (
+                    <PropertyItem key={String(item) + String(index)} item={item} />
+                  ))}
+
                 </ul>
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
+                    <img className="property__avatar user__avatar" src={host.src} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
-                    Angelina
+                    {host.name}
                   </span>
                   <span className="property__user-status">
                     Pro

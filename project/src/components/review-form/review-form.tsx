@@ -5,7 +5,6 @@ function ReviewForm(): JSX.Element {
 
   const textareaChangeHandler = (event:React.ChangeEvent<HTMLTextAreaElement>) => {
     setValue(event.target.value);
-    console.log('value', value)
   };
 
   return (

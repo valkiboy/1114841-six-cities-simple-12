@@ -1,35 +1,25 @@
 import { Link } from 'react-router-dom';
-import { Place } from '../../types/place';
-import { generatePath } from 'react-router-dom';
+import { Offer } from '../../types/offer';
 import Mark from '../mark/mark';
-import { useState } from 'react';
 
-type PlaceCardProps = {
-  apartment: Place;
+type CardProps = {
+  apartment: Offer;
+  setActiveItem(id: number): void;
 };
 
-const urlOffer = {
-  offer:'/offer/:id'
-};
+function OfferCard({ apartment, setActiveItem }: CardProps): JSX.Element {
+  const { id, src, price, title, type, premium, rating } = apartment;
 
-
-function PlaceCard({ apartment }: PlaceCardProps): JSX.Element {
-  const { id, src, price, title, type, premium } = apartment;
-  const [card, setCard] = useState({});
-
-  const mouseOverHandler = (event: React.MouseEvent<HTMLDivElement>) => {
-    setCard(event.currentTarget);
-
-    console.log('card', card);
-  };
+  const urlOffer = `/offer/${id}`;
+  const changeRating = `${Math.round(rating) / 0.05}%`;
 
   return (
-    <article onMouseOver={mouseOverHandler} className="cities__card place-card">
+    <article onMouseOver={() => setActiveItem(id)} onMouseOut={() => setActiveItem(-1)} className="cities__card place-card">
 
       {premium === true && <Mark /> }
 
       <div className="cities__image-wrapper place-card__image-wrapper">
-        <Link to='/offer/:id'>
+        <Link to={urlOffer}>
           <img className="place-card__image" src={src[0]} width="260" height="200" alt="Place" />
         </Link>
       </div>
@@ -42,12 +32,12 @@ function PlaceCard({ apartment }: PlaceCardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{width:changeRating}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={generatePath(urlOffer.offer,{id:id})}>{title}</Link>
+          <Link to={urlOffer}>{title}</Link>
         </h2>
         <p className="place-card__type">{type}</p>
       </div>
@@ -55,4 +45,4 @@ function PlaceCard({ apartment }: PlaceCardProps): JSX.Element {
   );
 }
 
-export default PlaceCard;
+export default OfferCard;

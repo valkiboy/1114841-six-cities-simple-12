@@ -5,24 +5,23 @@ import MainPage from '../../pages/main-page/main-page';
 import RoomPage from '../../pages/room-page/room-page';
 import LoginPage from '../../pages/login-page/login-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
-import { Reviews } from '../../types/place';
-import { Place } from '../../types/place';
+import { Reviews } from '../../types/offer';
+import { Offer } from '../../types/offer';
 
 
 type AppPageProps = {
-  placesCount: number;
   reviews: Reviews[];
-  apartments: Place[];
+  apartments: Offer[];
 }
 
-function App({ placesCount, apartments, reviews }: AppPageProps): JSX.Element {
+function App({ apartments, reviews }: AppPageProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<MainPage placesCount={placesCount} apartments={apartments}/>}
+            element={<MainPage apartments={apartments}/>}
           />
           <Route
             path={AppRoute.Login}

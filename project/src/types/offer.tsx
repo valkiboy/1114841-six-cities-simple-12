@@ -8,16 +8,14 @@ export type Host = {
 
 export type Reviews = {
   id: number;
-  review: {
-    src: string;
-    name: string;
-    score: number;
-    data: string;
-    text: string;
-  }[];
+  src: string;
+  name: string;
+  score: number;
+  data: string;
+  text: string;
 }
 
-export type Place = {
+export type Offer = {
   src: string[];
   premium: boolean;
   price: number;
@@ -25,8 +23,8 @@ export type Place = {
   description: string;
   type: ApartmentType;
   rating: number;
-  bedrooms: string;
-  guests: string;
+  bedrooms: number;
+  guests: number;
   items: string[];
   host: Host;
   id: number;

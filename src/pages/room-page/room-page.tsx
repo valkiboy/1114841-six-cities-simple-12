@@ -1,37 +1,13 @@
-import { Helmet } from 'react-helmet-async';
-import { useParams, Navigate } from 'react-router-dom';
-import Logo from '../../components/logo/logo';
-import { Offer } from '../../types/offer';
-import { Reviews } from '../../types/offer';
-import ReviewForm from '../../components/review-form/review-form';
-import PropertyFoto from '../../components/property-foto/property-foto';
-import PropertyItem from '../../components/propery-item/property-item';
-import changeRating from '../../utils';
-import { AppRoute } from '../../const';
-
-type RoomPageProps = {
-  reviews: Reviews[];
-  offers: Offer[];
-}
-
-function RoomPage({ reviews, offers }: RoomPageProps): JSX.Element {
-  const idRoom = useParams();
-  const [property] = offers.filter((offer) => String(offer.id) === String(idRoom.id));
-
-
-  if (property === undefined) {
-    return <Navigate to={AppRoute.PageNotFound} />;
-  }
-
-  const { rating, title, type, bedrooms, guests, host, items, src } = property;
-
+function RoomPage(): JSX.Element {
   return (
     <>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <Logo />
+              <a className="header__logo-link" href="main.html">
+                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
+              </a>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -53,17 +29,27 @@ function RoomPage({ reviews, offers }: RoomPageProps): JSX.Element {
       </header>
 
       <main className="page__main page__main--property">
-        <Helmet>
-          <title>six cities simple: property</title>
-        </Helmet>
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-
-              {src.map((foto, index) => (
-                <PropertyFoto key={String(foto) + String(index)} foto={foto} />
-              ))}
-
+              <div className="property__image-wrapper">
+                <img className="property__image" src="img/room.jpg" alt="studio" />
+              </div>
+              <div className="property__image-wrapper">
+                <img className="property__image" src="img/apartment-01.jpg" alt="studio" />
+              </div>
+              <div className="property__image-wrapper">
+                <img className="property__image" src="img/apartment-02.jpg" alt="studio" />
+              </div>
+              <div className="property__image-wrapper">
+                <img className="property__image" src="img/apartment-03.jpg" alt="studio" />
+              </div>
+              <div className="property__image-wrapper">
+                <img className="property__image" src="img/studio-01.jpg" alt="studio" />
+              </div>
+              <div className="property__image-wrapper">
+                <img className="property__image" src="img/apartment-01.jpg" alt="studio" />
+              </div>
             </div>
           </div>
           <div className="property__container container">
@@ -73,57 +59,74 @@ function RoomPage({ reviews, offers }: RoomPageProps): JSX.Element {
               </div>
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-
-                  {title}
-
+                  Beautiful &amp; luxurious studio at great location
                 </h1>
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: changeRating(rating) }}></span>
+                  <span style={{ width: '80%' }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">{property.rating}</span>
+                <span className="property__rating-value rating__value">4.8</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-
-                  {type}
-
+                  Apartment
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-
-                  {bedrooms} {bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
-
+                  3 Bedrooms
                 </li>
                 <li className="property__feature property__feature--adults">
-
-                  {guests > 1 ? `Max ${guests} adults` : `Max ${guests} adult`}
-
+                  Max 4 adults
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;{property.price}</b>
+                <b className="property__price-value">&euro;120</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-
-                  {items.map((item, index) => (
-                    <PropertyItem key={String(item) + String(index)} item={item} />
-                  ))}
-
+                  <li className="property__inside-item">
+                    Wi-Fi
+                  </li>
+                  <li className="property__inside-item">
+                    Washing machine
+                  </li>
+                  <li className="property__inside-item">
+                    Towels
+                  </li>
+                  <li className="property__inside-item">
+                    Heating
+                  </li>
+                  <li className="property__inside-item">
+                    Coffee machine
+                  </li>
+                  <li className="property__inside-item">
+                    Baby seat
+                  </li>
+                  <li className="property__inside-item">
+                    Kitchen
+                  </li>
+                  <li className="property__inside-item">
+                    Dishwasher
+                  </li>
+                  <li className="property__inside-item">
+                    Cabel TV
+                  </li>
+                  <li className="property__inside-item">
+                    Fridge
+                  </li>
                 </ul>
               </div>
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={host.src} width="74" height="74" alt="Host avatar" />
+                    <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
-                    {host.name}
+                    Angelina
                   </span>
                   <span className="property__user-status">
                     Pro
@@ -164,9 +167,52 @@ function RoomPage({ reviews, offers }: RoomPageProps): JSX.Element {
                     </div>
                   </li>
                 </ul>
+                <form className="reviews__form form" action="#" method="post">
+                  <label className="reviews__label form__label" htmlFor="review">Your review</label>
+                  <div className="reviews__rating-form form__rating">
+                    <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
+                    <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
+                      <svg className="form__star-image" width="37" height="33">
+                        <use xlinkHref="#icon-star"></use>
+                      </svg>
+                    </label>
 
-                <ReviewForm />
+                    <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" />
+                    <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
+                      <svg className="form__star-image" width="37" height="33">
+                        <use xlinkHref="#icon-star"></use>
+                      </svg>
+                    </label>
 
+                    <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
+                    <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
+                      <svg className="form__star-image" width="37" height="33">
+                        <use xlinkHref="#icon-star"></use>
+                      </svg>
+                    </label>
+
+                    <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
+                    <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
+                      <svg className="form__star-image" width="37" height="33">
+                        <use xlinkHref="#icon-star"></use>
+                      </svg>
+                    </label>
+
+                    <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
+                    <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
+                      <svg className="form__star-image" width="37" height="33">
+                        <use xlinkHref="#icon-star"></use>
+                      </svg>
+                    </label>
+                  </div>
+                  <textarea className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+                  <div className="reviews__button-wrapper">
+                    <p className="reviews__help">
+                      To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+                    </p>
+                    <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+                  </div>
+                </form>
               </section>
             </div>
           </div>

@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import s from './not-found-page.module.css';
 import { Link } from 'react-router-dom';
 
-function NotFoundPage(): JSX.Element {
+function PageNotFound(): JSX.Element {
   return (
     <div className={s.body}>
       <Helmet>
@@ -18,4 +18,4 @@ function NotFoundPage(): JSX.Element {
   );
 }
 
-export default NotFoundPage;
+export default PageNotFound;

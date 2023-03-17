@@ -1,17 +1,18 @@
-import { Link } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import { Offer } from '../../types/offer';
 import Mark from '../mark/mark';
+import changeRating from '../../utils';
+import { AppRoute } from '../../const';
 
 type CardProps = {
-  apartment: Offer;
+  offer: Offer;
   setActiveItem(id: number): void;
 };
 
-function OfferCard({ apartment, setActiveItem }: CardProps): JSX.Element {
-  const { id, src, price, title, type, premium, rating } = apartment;
+function OfferCard({ offer, setActiveItem }: CardProps): JSX.Element {
+  const { id, src, price, title, type, premium, rating } = offer;
 
-  const urlOffer = `/offer/${id}`;
-  const changeRating = `${Math.round(rating) / 0.05}%`;
+  const urlOffer = generatePath(AppRoute.Room, { id: `${id}` });
 
   return (
     <article onMouseOver={() => setActiveItem(id)} onMouseOut={() => setActiveItem(-1)} className="cities__card place-card">
@@ -32,7 +33,7 @@ function OfferCard({ apartment, setActiveItem }: CardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width:changeRating}}></span>
+            <span style={{width:changeRating(rating)}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

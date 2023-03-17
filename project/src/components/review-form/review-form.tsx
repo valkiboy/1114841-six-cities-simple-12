@@ -1,50 +1,33 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 
 function ReviewForm(): JSX.Element {
   const [value, setValue] = useState('');
+  const [rating, setRating] = useState('0');
 
-  const textareaChangeHandler = (event:React.ChangeEvent<HTMLTextAreaElement>) => {
+  const textareaChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setValue(event.target.value);
   };
+
+  const ratingChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    setRating(event.target.value);
+  };
+
+  const titles: string[] = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
 
   return (
     <form className="reviews__form form" action="#" method="post">
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
-        <input className="form__rating-input visually-hidden" name="rating" value="5" id="5-stars" type="radio" />
-        <label htmlFor="5-stars" className="reviews__rating-label form__rating-label" title="perfect">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"></use>
-          </svg>
-        </label>
-
-        <input className="form__rating-input visually-hidden" name="rating" value="4" id="4-stars" type="radio" />
-        <label htmlFor="4-stars" className="reviews__rating-label form__rating-label" title="good">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"></use>
-          </svg>
-        </label>
-
-        <input className="form__rating-input visually-hidden" name="rating" value="3" id="3-stars" type="radio" />
-        <label htmlFor="3-stars" className="reviews__rating-label form__rating-label" title="not bad">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"></use>
-          </svg>
-        </label>
-
-        <input className="form__rating-input visually-hidden" name="rating" value="2" id="2-stars" type="radio" />
-        <label htmlFor="2-stars" className="reviews__rating-label form__rating-label" title="badly">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"></use>
-          </svg>
-        </label>
-
-        <input className="form__rating-input visually-hidden" name="rating" value="1" id="1-star" type="radio" />
-        <label htmlFor="1-star" className="reviews__rating-label form__rating-label" title="terribly">
-          <svg className="form__star-image" width="37" height="33">
-            <use xlinkHref="#icon-star"></use>
-          </svg>
-        </label>
+        {titles.map((title, index) => (
+          <Fragment key={title}>
+            <input onChange={ratingChangeHandler} className="form__rating-input visually-hidden" name="rating" value={titles.length - index} id={`${titles.length - index}-stars`} type="radio" />
+            <label htmlFor={`${titles.length - index}-stars`} className="reviews__rating-label form__rating-label" title={title}>
+              <svg className="form__star-image" width="37" height="33">
+                <use xlinkHref="#icon-star"></use>
+              </svg>
+            </label>
+          </Fragment>)
+        )}
       </div>
       <textarea onChange={textareaChangeHandler} value={value} className="reviews__textarea form__textarea" id="review" name="review" placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
       <div className="reviews__button-wrapper">

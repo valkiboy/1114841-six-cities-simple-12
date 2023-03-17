@@ -4,21 +4,19 @@ import { useState } from 'react';
 import NoPlaces from '../no-places/no-places';
 
 type ListProps = {
-  apartments: Offer[];
+  offers: Offer[];
 }
 
-function OfferList({ apartments }: ListProps): JSX.Element {
+function OfferList({ offers }: ListProps): JSX.Element {
   // const [activeItem, setActiveItem] = useState(-1);
   const [, setActiveItem] = useState(-1);
 
-  // console.log('activeItem', activeItem);
-
   return (
     <div className="cities__places-container container">
-      {Array.isArray(apartments) && apartments.length > 0 ? (
+      {Array.isArray(offers) && offers.length > 0 ? (
         <section className="cities__places places">
           <h2 className="visually-hidden">Places</h2>
-          <b className="places__found"> {apartments.length} places to stay in Amsterdam</b>
+          <b className="places__found"> {offers.length} places to stay in Amsterdam</b>
           <form className="places__sorting" action="#" method="get">
             <span className="places__sorting-caption">Sort by</span>
             <span className="places__sorting-type" tabIndex={0}>
@@ -36,8 +34,8 @@ function OfferList({ apartments }: ListProps): JSX.Element {
           </form>
           <div className="cities__places-list places__list tabs__content">
 
-            {apartments.map((apartment) => (
-              <OfferCard setActiveItem={setActiveItem} key={apartment.id} apartment={apartment} />)
+            {offers.map((offer) => (
+              <OfferCard setActiveItem={setActiveItem} key={offer.id} offer={offer} />)
             )}
 
           </div>

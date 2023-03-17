@@ -1,31 +1,29 @@
 import { Helmet } from 'react-helmet-async';
-import { useParams } from 'react-router-dom';
+import { useParams, Navigate } from 'react-router-dom';
 import Logo from '../../components/logo/logo';
 import { Offer } from '../../types/offer';
 import { Reviews } from '../../types/offer';
 import ReviewForm from '../../components/review-form/review-form';
-import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PropertyFoto from '../../components/property-foto/property-foto';
 import PropertyItem from '../../components/propery-item/property-item';
+import changeRating from '../../utils';
+import { AppRoute } from '../../const';
 
 type RoomPageProps = {
   reviews: Reviews[];
-  apartments: Offer[];
+  offers: Offer[];
 }
 
-function RoomPage({ reviews, apartments }: RoomPageProps): JSX.Element {
+function RoomPage({ reviews, offers }: RoomPageProps): JSX.Element {
   const idRoom = useParams();
-  const property = apartments.find((apartment) => String(apartment.id) === String(idRoom.id));
+  const [property] = offers.filter((offer) => String(offer.id) === String(idRoom.id));
 
 
   if (property === undefined) {
-    return <NotFoundPage />;
+    return <Navigate to={AppRoute.PageNotFound} />;
   }
 
-  const changeRating = `${Math.round(property.rating) / 0.05}%`;
-  const host = property.host;
-  const items: string[] = property.items;
-  const fotos: string[] = property.src;
+  const { rating, title, type, bedrooms, guests, host, items, src } = property;
 
   return (
     <>
@@ -62,7 +60,7 @@ function RoomPage({ reviews, apartments }: RoomPageProps): JSX.Element {
           <div className="property__gallery-container container">
             <div className="property__gallery">
 
-              {fotos.map((foto, index) => (
+              {src.map((foto, index) => (
                 <PropertyFoto key={String(foto) + String(index)} foto={foto} />
               ))}
 
@@ -76,13 +74,13 @@ function RoomPage({ reviews, apartments }: RoomPageProps): JSX.Element {
               <div className="property__name-wrapper">
                 <h1 className="property__name">
 
-                  {property.title}
+                  {title}
 
                 </h1>
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{ width: changeRating }}></span>
+                  <span style={{ width: changeRating(rating) }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
                 <span className="property__rating-value rating__value">{property.rating}</span>
@@ -90,17 +88,17 @@ function RoomPage({ reviews, apartments }: RoomPageProps): JSX.Element {
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
 
-                  {property.type}
+                  {type}
 
                 </li>
                 <li className="property__feature property__feature--bedrooms">
 
-                  {property.bedrooms} {property.bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
+                  {bedrooms} {bedrooms > 1 ? 'Bedrooms' : 'Bedroom'}
 
                 </li>
                 <li className="property__feature property__feature--adults">
 
-                  {property.guests > 1 ? `Max ${property.guests} adults` : `Max ${property.guests} adult`}
+                  {guests > 1 ? `Max ${guests} adults` : `Max ${guests} adult`}
 
                 </li>
               </ul>

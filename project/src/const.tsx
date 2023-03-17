@@ -1,5 +1,6 @@
 export const AppRoute = {
   Root: '/',
   Login: '/login',
-  Room: '/offer/:id'
+  Room: '/offer/:id',
+  PageNotFound:'/404'
 } as const;

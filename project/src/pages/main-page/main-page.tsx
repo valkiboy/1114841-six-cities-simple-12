@@ -3,10 +3,10 @@ import Logo from '../../components/logo/logo';
 import { Offer } from '../../types/offer';
 
 type MainPageProps = {
-  apartments: Offer[];
+  offers: Offer[];
 }
 
-function MainPage({ apartments }: MainPageProps): JSX.Element {
+function MainPage({ offers }: MainPageProps): JSX.Element {
   return (
     <div className="page--main">
       <header className="header">
@@ -74,7 +74,7 @@ function MainPage({ apartments }: MainPageProps): JSX.Element {
         </div>
         <div className="cities">
 
-          <OfferList apartments={apartments} />
+          <OfferList offers={offers} />
 
         </div>
       </main>

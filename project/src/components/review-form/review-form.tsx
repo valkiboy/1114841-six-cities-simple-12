@@ -2,7 +2,8 @@ import { Fragment, useState } from 'react';
 
 function ReviewForm(): JSX.Element {
   const [value, setValue] = useState('');
-  const [rating, setRating] = useState('0');
+  // const [rating, setRating] = useState('0');
+  const [, setRating] = useState('0');
 
   const textareaChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setValue(event.target.value);

@@ -10,7 +10,7 @@ type CardProps = {
 };
 
 function OfferCard({ offer, setActiveItem }: CardProps): JSX.Element {
-  const { id, images, price, title, type, isPremium, rating, previewImage } = offer;
+  const { id, price, title, type, isPremium, rating, previewImage } = offer;
 
   const urlOffer = generatePath(AppRoute.Room, { id: `${id}` });
 

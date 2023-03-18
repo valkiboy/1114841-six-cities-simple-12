@@ -3,6 +3,7 @@ import { useRef, useEffect } from 'react';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../const';
 import useMap from '../../hooks/useMap/useMap';
 import { Icon, Marker } from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
   offers: Offer[];
@@ -49,7 +50,7 @@ function Map({ offers, city, activeItem }: MapProps): JSX.Element {
 
 
   return (
-    <section className="cities__map map" ref={mapRef} ></section>
+    <section className="cities__map map" ref={mapRef} style={{width: '500px'}} ></section>
   );
 }
 

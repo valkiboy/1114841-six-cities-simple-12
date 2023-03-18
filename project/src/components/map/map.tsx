@@ -35,8 +35,7 @@ function Map({ offers, city, activeItem }: MapProps): JSX.Element {
           lat: offer.location.latitude,
           lng: offer.location.longitude
         });
-        console.log('offer.location.latitude', offer.location.latitude);
-        console.log('offer.location.longitude', offer.location.longitude);
+
         marker
           .setIcon(
             activeItem !== undefined && offer.id === activeItem

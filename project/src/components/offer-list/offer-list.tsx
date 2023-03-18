@@ -1,15 +1,16 @@
 import OfferCard from '../offer-card/offer-card';
-import { Offer } from '../../types/offer';
+import { Offer, City } from '../../types/offer';
 import { useState } from 'react';
 import NoPlaces from '../no-places/no-places';
+import Map from '../map/map';
 
 type ListProps = {
   offers: Offer[];
+  city: City;
 }
 
-function OfferList({ offers }: ListProps): JSX.Element {
-  // const [activeItem, setActiveItem] = useState(-1);
-  const [, setActiveItem] = useState(-1);
+function OfferList({ offers, city }: ListProps): JSX.Element {
+  const [activeItem, setActiveItem] = useState(-1);
 
   return (
     <div className="cities__places-container container">
@@ -41,7 +42,9 @@ function OfferList({ offers }: ListProps): JSX.Element {
           </div>
         </section>) : <NoPlaces />}
       <div className="cities__right-section">
-        <section className="cities__map map"></section>
+
+        <Map offers={offers} city={city} activeItem={activeItem} />
+
       </div>
     </div>
   );

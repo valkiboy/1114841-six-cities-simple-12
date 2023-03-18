@@ -1,9 +1,10 @@
 export type ApartmentType = 'Apartment' | 'Private Room' | 'House' | 'Hotel';
 
 export type Host = {
-  src: string;
+  avatarUrl: string;
   name: string;
-  status: boolean;
+  isPro: boolean;
+  id: number;
 }
 
 export type Reviews = {
@@ -15,17 +16,33 @@ export type Reviews = {
   text: string;
 }
 
+export type City = {
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+  name: string;
+}
+
 export type Offer = {
-  src: string[];
-  premium: boolean;
+  images: string[];
+  isPremium: boolean;
   price: number;
   title: string;
   description: string;
   type: ApartmentType;
   rating: number;
   bedrooms: number;
-  guests: number;
-  items: string[];
+  maxAdults: number;
+  goods: string[];
   host: Host;
   id: number;
+  previewImage: string;
+  location: {
+    latitude: number;
+    longitude: number;
+    zoom: number;
+  };
+  city: City;
 }

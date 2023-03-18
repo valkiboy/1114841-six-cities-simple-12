@@ -4,7 +4,7 @@ import Logo from '../../components/logo/logo';
 import { Offer } from '../../types/offer';
 import { Reviews } from '../../types/offer';
 import ReviewForm from '../../components/review-form/review-form';
-import PropertyFoto from '../../components/property-foto/property-foto';
+import PropertyImage from '../../components/property-image/property-image';
 import PropertyItem from '../../components/propery-item/property-item';
 import changeRating from '../../utils';
 import { AppRoute } from '../../const';
@@ -23,7 +23,7 @@ function RoomPage({ reviews, offers }: RoomPageProps): JSX.Element {
     return <Navigate to={AppRoute.PageNotFound} />;
   }
 
-  const { rating, title, type, bedrooms, guests, host, items, src } = property;
+  const { rating, title, type, bedrooms, maxAdults, host, goods, images } = property;
 
   return (
     <>
@@ -60,8 +60,8 @@ function RoomPage({ reviews, offers }: RoomPageProps): JSX.Element {
           <div className="property__gallery-container container">
             <div className="property__gallery">
 
-              {src.map((foto, index) => (
-                <PropertyFoto key={String(foto) + String(index)} foto={foto} />
+              {images.map((image, index) => (
+                <PropertyImage key={String(image) + String(index)} image={image} />
               ))}
 
             </div>
@@ -98,7 +98,7 @@ function RoomPage({ reviews, offers }: RoomPageProps): JSX.Element {
                 </li>
                 <li className="property__feature property__feature--adults">
 
-                  {guests > 1 ? `Max ${guests} adults` : `Max ${guests} adult`}
+                  {maxAdults > 1 ? `Max ${maxAdults} adults` : `Max ${maxAdults} adult`}
 
                 </li>
               </ul>
@@ -110,7 +110,7 @@ function RoomPage({ reviews, offers }: RoomPageProps): JSX.Element {
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
 
-                  {items.map((item, index) => (
+                  {goods.map((item, index) => (
                     <PropertyItem key={String(item) + String(index)} item={item} />
                   ))}
 
@@ -120,7 +120,7 @@ function RoomPage({ reviews, offers }: RoomPageProps): JSX.Element {
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
                   <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="property__avatar user__avatar" src={host.src} width="74" height="74" alt="Host avatar" />
+                    <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
                     {host.name}

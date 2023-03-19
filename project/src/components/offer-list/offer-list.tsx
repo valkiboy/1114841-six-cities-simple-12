@@ -11,6 +11,7 @@ type ListProps = {
 
 function OfferList({ offers, city }: ListProps): JSX.Element {
   const [activeItem, setActiveItem] = useState<number>(-1);
+  const classNaming = 'cities__map map';
 
   return (
     <div className="cities__places-container container">
@@ -43,7 +44,7 @@ function OfferList({ offers, city }: ListProps): JSX.Element {
         </section>) : <NoPlaces />}
       <div className="cities__right-section">
 
-        <Map offers={offers} city={city} activeItem={activeItem} />
+        <Map offers={offers} city={city} activeItem={activeItem} classNaming={classNaming} />
 
       </div>
     </div>

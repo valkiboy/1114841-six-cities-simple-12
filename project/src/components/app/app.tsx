@@ -30,7 +30,7 @@ function App({ offers, reviews, city }: AppPageProps): JSX.Element {
           />
           <Route
             path={AppRoute.Room}
-            element={<RoomPage offers={offers} reviews={reviews}/>}
+            element={<RoomPage offers={offers} reviews={reviews} city={city}/>}
           />
           <Route
             path='*'

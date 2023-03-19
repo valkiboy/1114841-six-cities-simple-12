@@ -1,6 +1,5 @@
 import { generatePath, Link } from 'react-router-dom';
 import { Offer } from '../../types/offer';
-import Mark from '../mark/mark';
 import changeRating from '../../common/utils';
 import { AppRoute } from '../../common/const';
 
@@ -17,7 +16,10 @@ function OfferCard({ offer, setActiveItem }: CardProps): JSX.Element {
   return (
     <article onMouseOver={() => setActiveItem(id)} onMouseOut={() => setActiveItem(-1)} className="cities__card place-card">
 
-      {isPremium === true && <Mark /> }
+      {isPremium === true &&
+      <div className="place-card__mark" >
+        <span> Premium </span>
+      </div>}
 
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={urlOffer}>
@@ -33,7 +35,7 @@ function OfferCard({ offer, setActiveItem }: CardProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width:changeRating(rating)}}></span>
+            <span style={{ width: changeRating(rating) }}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

@@ -1,12 +1,13 @@
 import OfferList from '../../components/offer-list/offer-list';
 import Logo from '../../components/logo/logo';
-import { Offer } from '../../types/offer';
+import { Offer, City } from '../../types/offer';
 
 type MainPageProps = {
   offers: Offer[];
+  city: City;
 }
 
-function MainPage({ offers }: MainPageProps): JSX.Element {
+function MainPage({ offers, city }: MainPageProps): JSX.Element {
   return (
     <div className="page--main">
       <header className="header">
@@ -74,7 +75,7 @@ function MainPage({ offers }: MainPageProps): JSX.Element {
         </div>
         <div className="cities">
 
-          <OfferList offers={offers} />
+          <OfferList offers={offers} city={city} />
 
         </div>
       </main>

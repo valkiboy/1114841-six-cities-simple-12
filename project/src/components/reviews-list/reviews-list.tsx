@@ -1,6 +1,6 @@
 import ReviewForm from '../../components/review-form/review-form';
 import { Reviews } from '../../types/offer';
-import ReviewItem from './review-item/review-item';
+import ReviewItem from '../review-item/review-item';
 
 type ReviewsListProps = {
   reviews: Reviews[];
@@ -22,7 +22,7 @@ function ReviewsList({ reviews }: ReviewsListProps): JSX.Element {
       <ReviewForm />
 
     </section>
-  )
+  );
 }
 
 export default ReviewsList;

@@ -1,5 +1,5 @@
-import { Reviews } from '../../../types/offer';
-import changeRating from '../../../common/utils';
+import { Reviews } from '../../types/offer';
+import changeRating from '../../common/utils';
 
 type ReviewItemProps = {
   review: Reviews;
@@ -31,7 +31,7 @@ function ReviewItem({ review }: ReviewItemProps): JSX.Element {
         <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
       </div>
     </li>
-  )
+  );
 }
 
 export default ReviewItem;

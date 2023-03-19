@@ -8,12 +8,16 @@ export type Host = {
 }
 
 export type Reviews = {
+  comment: string;
+  date: string;
   id: number;
-  src: string;
-  name: string;
-  score: number;
-  data: string;
-  text: string;
+  rating: number;
+  user: {
+    avatarUrl: string;
+    id: number;
+    isPro: boolean;
+    name: string;
+  };
 }
 
 export type City = {

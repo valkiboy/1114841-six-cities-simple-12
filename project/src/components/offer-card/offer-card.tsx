@@ -1,8 +1,8 @@
 import { generatePath, Link } from 'react-router-dom';
 import { Offer } from '../../types/offer';
 import Mark from '../mark/mark';
-import changeRating from '../../utils';
-import { AppRoute } from '../../const';
+import changeRating from '../../common/utils';
+import { AppRoute } from '../../common/const';
 
 type CardProps = {
   offer: Offer;

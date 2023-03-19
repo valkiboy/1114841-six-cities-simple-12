@@ -6,8 +6,8 @@ import { Reviews } from '../../types/offer';
 import ReviewForm from '../../components/review-form/review-form';
 import PropertyImage from '../../components/property-image/property-image';
 import PropertyItem from '../../components/propery-item/property-item';
-import changeRating from '../../utils';
-import { AppRoute } from '../../const';
+import changeRating from '../../common/utils';
+import { AppRoute } from '../../common/const';
 
 type RoomPageProps = {
   reviews: Reviews[];
@@ -15,7 +15,7 @@ type RoomPageProps = {
 }
 
 function RoomPage({ reviews, offers }: RoomPageProps): JSX.Element {
-  const idRoom = useParams();
+  const idRoom = useParams<string>();
   const [property] = offers.filter((offer) => String(offer.id) === String(idRoom.id));
 
 

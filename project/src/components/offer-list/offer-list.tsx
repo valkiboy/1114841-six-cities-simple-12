@@ -10,7 +10,7 @@ type ListProps = {
 }
 
 function OfferList({ offers, city }: ListProps): JSX.Element {
-  const [activeItem, setActiveItem] = useState(-1);
+  const [activeItem, setActiveItem] = useState<number>(-1);
 
   return (
     <div className="cities__places-container container">

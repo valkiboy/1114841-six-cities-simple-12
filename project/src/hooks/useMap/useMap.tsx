@@ -4,7 +4,7 @@ import { Map, TileLayer } from 'leaflet';
 
 function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City) {
   const [map, setMap] = useState<Map | null>(null);
-  const isRenderedRef = useRef(false);
+  const isRenderedRef = useRef<boolean>(false);
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {

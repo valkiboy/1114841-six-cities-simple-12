@@ -5,9 +5,10 @@ import OfferCard from '../offer-card/offer-card';
 
 type PlacesListProps = {
   offers: Offer[];
+  num?: number;
 }
 
-function PlacesList({offers}: PlacesListProps): JSX.Element {
+function PlacesList({offers, num}: PlacesListProps): JSX.Element {
 
   // const [activeItem, setActiveItem] = useState<number>(-1);
   const [, setActiveItem] = useState<number>(-1);
@@ -18,6 +19,7 @@ function PlacesList({offers}: PlacesListProps): JSX.Element {
       <div className="near-places__list places__list">
 
         {offers.map((offer) => (
+          offer.id !== num &&
           <OfferCard setActiveItem={setActiveItem} key={offer.id} offer={offer} />)
         )}
 

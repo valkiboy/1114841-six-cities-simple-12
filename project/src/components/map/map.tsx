@@ -14,14 +14,14 @@ type MapProps = {
 
 const defaultCustomIcon = new Icon({
   iconUrl: URL_MARKER_DEFAULT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [27, 39],
+  iconAnchor: [27, 39]
 });
 
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
-  iconSize: [40, 40],
-  iconAnchor: [20, 40]
+  iconSize: [27, 39],
+  iconAnchor: [27, 39]
 });
 
 function Map({ offers, city, activeItem, classNaming }: MapProps): JSX.Element {
@@ -51,7 +51,7 @@ function Map({ offers, city, activeItem, classNaming }: MapProps): JSX.Element {
 
 
   return (
-    <section className={classNaming} ref={mapRef} ></section>
+    <section className={`${classNaming}__map map`} ref={mapRef} ></section>
   );
 }
 

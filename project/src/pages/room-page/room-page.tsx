@@ -19,7 +19,7 @@ type RoomPageProps = {
 function RoomPage({ reviews, offers, city }: RoomPageProps): JSX.Element {
   const idRoom = useParams<string>();
   const offer = offers.find((item) => String(item.id) === String(idRoom.id));
-  const classNaming = 'property__map map';
+  const classNaming = 'property';
 
   if (offer === undefined) {
     return <Navigate to={AppRoute.PageNotFound} />;
@@ -154,7 +154,7 @@ function RoomPage({ reviews, offers, city }: RoomPageProps): JSX.Element {
         </section>
         <div className="container">
 
-          <PlacesList offers={offers} />
+          <PlacesList offers={offers} num={id} />
 
         </div>
       </main>

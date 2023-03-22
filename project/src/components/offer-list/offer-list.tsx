@@ -11,7 +11,7 @@ type ListProps = {
 
 function OfferList({ offers, city }: ListProps): JSX.Element {
   const [activeItem, setActiveItem] = useState<number>(-1);
-  const classNaming = 'cities__map map';
+  const classNaming = 'cities';
 
   return (
     <div className="cities__places-container container">

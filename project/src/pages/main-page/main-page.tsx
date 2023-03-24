@@ -1,13 +1,14 @@
 import OfferList from '../../components/offer-list/offer-list';
 import Logo from '../../components/logo/logo';
 import { Offer, City } from '../../types/offer';
+import Tabs from '../../components/tabs/tabs';
 
 type MainPageProps = {
   offers: Offer[];
-  city: City;
+  citys: City[];
 }
 
-function MainPage({ offers, city }: MainPageProps): JSX.Element {
+function MainPage({ offers, citys }: MainPageProps): JSX.Element {
   return (
     <div className="page--main">
       <header className="header">
@@ -37,45 +38,12 @@ function MainPage({ offers, city }: MainPageProps): JSX.Element {
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
-        <div className="tabs">
-          <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
-          </section>
-        </div>
+
+        <Tabs citys={citys} />
+
         <div className="cities">
 
-          <OfferList offers={offers} city={city} />
+          <OfferList offers={offers} citys={citys} />
 
         </div>
       </main>

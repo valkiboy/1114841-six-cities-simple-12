@@ -6,10 +6,10 @@ import Map from '../map/map';
 
 type ListProps = {
   offers: Offer[];
-  city: City;
+  citys: City[];
 }
 
-function OfferList({ offers, city }: ListProps): JSX.Element {
+function OfferList({ offers, citys }: ListProps): JSX.Element {
   const [activeItem, setActiveItem] = useState<number>(-1);
   const classNaming = 'cities';
 
@@ -44,7 +44,7 @@ function OfferList({ offers, city }: ListProps): JSX.Element {
         </section>) : <NoPlaces />}
       <div className="cities__right-section">
 
-        <Map offers={offers} city={city} activeItem={activeItem} classNaming={classNaming} />
+        <Map offers={offers} city={citys[0]} activeItem={activeItem} classNaming={classNaming} />
 
       </div>
     </div>

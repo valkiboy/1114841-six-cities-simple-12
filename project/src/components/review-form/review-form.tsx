@@ -5,6 +5,7 @@ function ReviewForm(): JSX.Element {
   // const [rating, setRating] = useState('0');
   const [, setRating] = useState<string>('0');
 
+
   const textareaChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setValue(event.target.value);
   };

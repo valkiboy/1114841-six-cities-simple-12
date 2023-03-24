@@ -7,6 +7,7 @@ import LoginPage from '../../pages/login-page/login-page';
 import PageNotFound from '../../pages/not-found-page/not-found-page';
 import { Reviews } from '../../types/offer';
 import { Offer, City } from '../../types/offer';
+import ScrollToTop from '../scrool-to-top/scrool-to-top';
 
 
 type AppPageProps = {
@@ -18,11 +19,13 @@ type AppPageProps = {
 function App({ offers, reviews, city }: AppPageProps): JSX.Element {
   return (
     <HelmetProvider>
+
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<MainPage offers={offers} city={city}/>}
+            element={<MainPage offers={offers} city={city} />}
           />
           <Route
             path={AppRoute.Login}
@@ -30,7 +33,7 @@ function App({ offers, reviews, city }: AppPageProps): JSX.Element {
           />
           <Route
             path={AppRoute.Room}
-            element={<RoomPage offers={offers} reviews={reviews} city={city}/>}
+            element={<RoomPage offers={offers} reviews={reviews} city={city} />}
           />
           <Route
             path='*'

@@ -25,8 +25,6 @@ function MainPage({ offers, citys }: MainPageProps): JSX.Element {
 
   }, [currentOffers.length, dispatch]);
 
-
-  // const activeOffers = useAppSelector((state) => state.currentOffers);
   const city = citys.find((item) => item.name === activeTab);
 
   if (city === undefined) {

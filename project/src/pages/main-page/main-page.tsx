@@ -26,7 +26,7 @@ function MainPage({ offers, citys }: MainPageProps): JSX.Element {
   }, [currentOffers.length, dispatch]);
 
 
-  const activeOffers = useAppSelector((state) => state.currentOffers);
+  // const activeOffers = useAppSelector((state) => state.currentOffers);
   const city = citys.find((item) => item.name === activeTab);
 
   if (city === undefined) {
@@ -60,7 +60,7 @@ function MainPage({ offers, citys }: MainPageProps): JSX.Element {
         </div>
       </header>
 
-      <main className={`page__main page__main--index ${activeOffers === 0 ? 'page__main--index-empty' : ''}`}>
+      <main className={`page__main page__main--index ${currentOffers.length === 0 ? 'page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
 
         <Tabs citys={citys} activeTab={activeTab} />

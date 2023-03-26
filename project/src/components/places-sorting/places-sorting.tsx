@@ -5,7 +5,7 @@ import SortItem from '../sort-item/sort-item';
 function PlacesSorting(): JSX.Element {
 
   const [isClosed, setIsClosed] = useState<boolean>(true);
-  const [activeItem] = useState<string>(SortItems.Popular);
+  const [activeItem, setActiveItem] = useState<string>(SortItems.Popular);
 
   const isCloseHandler = () => {
     setIsClosed((prevIsClosed) => !prevIsClosed);
@@ -20,10 +20,10 @@ function PlacesSorting(): JSX.Element {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom ${isClosed === true ? '' : 'places__options--opened'}`}>
+      <ul className={`places__options places__options--custom ${isClosed === true ? '' : 'places__options--opened'}`} onClick={isCloseHandler}>
 
         {Object.values(SortItems).map((item, index) => (
-          <SortItem key={String(item) + String(index)} activeItem={activeItem} item={item} />
+          <SortItem key={String(item) + String(index)} activeItem={activeItem} item={item} setActiveItem={setActiveItem} />
         ))}
 
       </ul>

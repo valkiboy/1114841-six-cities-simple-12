@@ -5,18 +5,19 @@ import MainPage from '../../pages/main-page/main-page';
 import RoomPage from '../../pages/room-page/room-page';
 import LoginPage from '../../pages/login-page/login-page';
 import PageNotFound from '../../pages/not-found-page/not-found-page';
-import { Reviews } from '../../types/offer';
-import { Offer, City } from '../../types/offer';
+import { Reviews, Offer, City } from '../../types/offer';
 import ScrollToTop from '../scrool-to-top/scrool-to-top';
 
 
 type AppPageProps = {
   reviews: Reviews[];
   offers: Offer[];
-  city: City;
+  citys: City[];
 }
 
-function App({ offers, reviews, city }: AppPageProps): JSX.Element {
+
+function App({ offers, reviews, citys }: AppPageProps): JSX.Element {
+
   return (
     <HelmetProvider>
 
@@ -25,7 +26,7 @@ function App({ offers, reviews, city }: AppPageProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Root}
-            element={<MainPage offers={offers} city={city} />}
+            element={<MainPage offers={offers} citys={citys} />}
           />
           <Route
             path={AppRoute.Login}
@@ -33,7 +34,7 @@ function App({ offers, reviews, city }: AppPageProps): JSX.Element {
           />
           <Route
             path={AppRoute.Room}
-            element={<RoomPage offers={offers} reviews={reviews} city={city} />}
+            element={<RoomPage offers={offers} reviews={reviews} citys={citys} />}
           />
           <Route
             path='*'

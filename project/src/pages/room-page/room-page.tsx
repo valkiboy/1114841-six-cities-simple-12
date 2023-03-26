@@ -13,10 +13,10 @@ import PlacesList from '../../components/places-list/places-list';
 type RoomPageProps = {
   reviews: Reviews[];
   offers: Offer[];
-  city: City;
+  citys: City[];
 }
 
-function RoomPage({ reviews, offers, city }: RoomPageProps): JSX.Element {
+function RoomPage({ reviews, offers, citys }: RoomPageProps): JSX.Element {
   const idRoom = useParams<string>();
   const offer = offers.find((item) => String(item.id) === String(idRoom.id));
   const classNaming = 'property';
@@ -149,7 +149,7 @@ function RoomPage({ reviews, offers, city }: RoomPageProps): JSX.Element {
             </div>
           </div>
 
-          <Map offers={offers} classNaming={classNaming} city={city} activeItem={id} />
+          <Map offers={offers} classNaming={classNaming} city={citys[0]} activeItem={id} />
 
         </section>
         <div className="container">

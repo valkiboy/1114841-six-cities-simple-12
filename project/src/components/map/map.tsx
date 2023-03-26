@@ -5,6 +5,7 @@ import useMap from '../../hooks/useMap/useMap';
 import { Icon, Marker } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
+
 type MapProps = {
   offers: Offer[];
   city: City;
@@ -31,6 +32,9 @@ function Map({ offers, city, activeItem, classNaming }: MapProps): JSX.Element {
 
 
   useEffect(() => {
+    //TODO
+    // eslint-disable-next-line
+    console.log('отработал юзЭффект')
     if (map) {
       offers.forEach((offer) => {
         const marker = new Marker({
@@ -46,8 +50,15 @@ function Map({ offers, city, activeItem, classNaming }: MapProps): JSX.Element {
           )
           .addTo(map);
       });
+      //TODO
+      return () => {
+        // eslint-disable-next-line
+        console.log('отработал ретурн')
+      };
     }
-  }, [map, offers, activeItem]);
+
+
+  }, [map, offers, activeItem, city]);
 
 
   return (

@@ -5,7 +5,7 @@ import { AppRoute } from '../../common/const';
 
 type CardProps = {
   offer: Offer;
-  setActiveItem(id: number): void;
+  setActiveItem?(id: number): void;
 };
 
 function OfferCard({ offer, setActiveItem }: CardProps): JSX.Element {
@@ -13,8 +13,20 @@ function OfferCard({ offer, setActiveItem }: CardProps): JSX.Element {
 
   const urlOffer = generatePath(AppRoute.Room, { id: `${id}` });
 
+  const mouseOverHandler = () => {
+    if (setActiveItem !== undefined) {
+      setActiveItem(id);
+    }
+  };
+
+  const mouseOutHandler = () => {
+    if (setActiveItem !== undefined) {
+      setActiveItem(-1);
+    }
+  };
+
   return (
-    <article onMouseOver={() => setActiveItem(id)} onMouseOut={() => setActiveItem(-1)} className="cities__card place-card">
+    <article onMouseOver={mouseOverHandler} onMouseOut={mouseOutHandler} className="cities__card place-card">
 
       {isPremium === true &&
       <div className="place-card__mark" >

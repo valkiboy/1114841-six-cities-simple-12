@@ -1,22 +1,26 @@
+import { Link } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/index/index';
+import { changeCity } from '../../store/action';
 import { City } from '../../types/offer';
 
 type TabsItemProps = {
   city: City;
-  activeItem: string;
-  setActiveItem(item: string): void;
+  activeTab: string;
 }
 
-function TabsItem({ city, activeItem, setActiveItem }: TabsItemProps): JSX.Element {
-  // TODO не забыть стереть
-  // eslint-disable-next-line
-  console.log('city.name', city.name)
-  // eslint-disable-next-line
-  console.log('activeItem', activeItem)
+function TabsItem({ city, activeTab }: TabsItemProps): JSX.Element {
+
+  const dispatch = useAppDispatch();
+
+  const changeCityHandler = () => {
+    dispatch(changeCity(city.name));
+  };
+
   return (
-    <li className="locations__item" onClick={() => setActiveItem(city.name)}>
-      <a className={`locations__item-link tabs__item ${city.name === activeItem ? 'tabs__item--active' : ''}`} >
+    <li className="locations__item" onClick={changeCityHandler}>
+      <Link to='#' className={`locations__item-link tabs__item ${city.name === activeTab ? 'tabs__item--active' : ''}`} >
         <span>{city.name}</span>
-      </a>
+      </Link>
     </li>
   );
 }

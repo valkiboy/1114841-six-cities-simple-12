@@ -161,4 +161,85 @@ export const offers: Offer[] = [
       'name': 'Amsterdam'
     },
   },
+  {
+    'id': 5,
+    'images': ['img/apartment-03.jpg', 'img/apartment-03.jpg', 'img/apartment-02.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/room.jpg'],
+    'isPremium': true,
+    'price': 180,
+    'title': 'Nice, cozy, warm big bed apartment',
+    'description': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.',
+    'type': 'Apartment',
+    'rating': 5,
+    'bedrooms': 8,
+    'maxAdults': 15,
+    'goods': ['Wi-Fi',
+      'Washing machine',
+      'Towels',
+      'Heating',
+      'Coffee machine',
+      'Baby seat',
+      'Kitchen',
+      'Dishwasher',
+      'Cabel TV',
+      'Fridge'
+    ],
+    'host': {
+      'avatarUrl': 'img/avatar-angelina.jpg',
+      'id': 4,
+      'isPro': true,
+      'name': 'Natasha'
+    },
+    'previewImage': 'img/apartment-03.jpg',
+    'location': {
+      'latitude': 48.8534,
+      'longitude': 2.939309666406198,
+      'zoom': 8
+    },
+    'city': {
+      'location': {
+        'latitude': 48.8534,
+        'longitude': 2.3488,
+        'zoom': 10
+      },
+      'name': 'Paris'
+    },
+  },
+  {
+    'id': 6,
+    'images': ['img/room.jpg', 'img/room.jpg', 'img/apartment-01.jpg', 'img/apartment-02.jpg', 'img/apartment-03.jpg', 'img/apartment-03.jpg'],
+    'isPremium': false,
+    'price': 80,
+    'title': 'Wood and stone place',
+    'description': 'An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.',
+    'type': 'Private Room',
+    'rating': 2.5,
+    'bedrooms': 1,
+    'maxAdults': 2,
+    'goods': ['Wi-Fi',
+      'Washing machine',
+      'Heating',
+      'Coffee machine',
+      'Cabel TV'
+    ],
+    'host': {
+      'avatarUrl': 'img/avatar-angelina.jpg',
+      'id': 4,
+      'isPro': true,
+      'name': 'Marina'
+    },
+    'previewImage': 'img/room.jpg',
+    'location': {
+      'latitude': 48.8534,
+      'longitude': 2.85309666406198,
+      'zoom': 8
+    },
+    'city': {
+      'location': {
+        'latitude': 48.8534,
+        'longitude': 2.3488,
+        'zoom': 10
+      },
+      'name': 'Paris'
+    },
+  },
 ];

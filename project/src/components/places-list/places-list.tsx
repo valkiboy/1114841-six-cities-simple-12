@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Offer } from '../../types/offer';
 import OfferCard from '../offer-card/offer-card';
 
@@ -10,9 +9,6 @@ type PlacesListProps = {
 
 function PlacesList({offers, num}: PlacesListProps): JSX.Element {
 
-  // const [activeItem, setActiveItem] = useState<number>(-1);
-  const [, setActiveItem] = useState<number>(-1);
-
   return (
     <section className="near-places places">
       <h2 className="near-places__title">Other places in the neighbourhood</h2>
@@ -20,7 +16,7 @@ function PlacesList({offers, num}: PlacesListProps): JSX.Element {
 
         {offers.map((offer) => (
           offer.id !== num &&
-          <OfferCard setActiveItem={setActiveItem} key={offer.id} offer={offer} />)
+          <OfferCard key={offer.id} offer={offer} />)
         )}
 
       </div>

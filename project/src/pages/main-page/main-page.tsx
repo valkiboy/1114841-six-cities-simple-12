@@ -2,11 +2,9 @@ import OfferList from '../../components/offer-list/offer-list';
 import Logo from '../../components/logo/logo';
 import { Offer, City } from '../../types/offer';
 import Tabs from '../../components/tabs/tabs';
-import { useAppSelector, useAppDispatch } from '../../hooks/index';
-import { changeCurrentOffers } from '../../store/action';
+import { useAppSelector } from '../../hooks/index';
 import { Navigate } from 'react-router-dom';
 import { AppRoute } from '../../common/const';
-import { useEffect } from 'react';
 
 type MainPageProps = {
   offers: Offer[];
@@ -17,24 +15,16 @@ function MainPage({ offers, citys }: MainPageProps): JSX.Element {
 
   const activeTab = useAppSelector((state) => state.city);
   const currentOffers = offers.filter((offer) => offer.city.name === activeTab);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-
-    dispatch(changeCurrentOffers(currentOffers.length));
-
-  }, [currentOffers.length, dispatch]);
 
 
-  const activeOffers = useAppSelector((state) => state.currentOffers);
   const city = citys.find((item) => item.name === activeTab);
 
   if (city === undefined) {
-    return <Navigate to={AppRoute.PageNotFound} />;
+    return <Navigate to={AppRoute.PageNotFound} replace/>;
   }
 
   return (
-    <div className="page--main">
+    <div className="page page--gray page--main">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -60,7 +50,7 @@ function MainPage({ offers, citys }: MainPageProps): JSX.Element {
         </div>
       </header>
 
-      <main className={`page__main page__main--index ${activeOffers === 0 ? 'page__main--index-empty' : ''}`}>
+      <main className={`page__main page__main--index ${currentOffers.length === 0 ? 'page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
 
         <Tabs citys={citys} activeTab={activeTab} />

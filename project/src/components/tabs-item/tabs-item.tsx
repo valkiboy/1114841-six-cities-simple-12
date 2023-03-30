@@ -18,7 +18,7 @@ function TabsItem({ city, activeTab }: TabsItemProps): JSX.Element {
 
   return (
     <li className="locations__item" onClick={changeCityHandler}>
-      <Link to='#' className={`locations__item-link tabs__item ${city.name === activeTab ? 'tabs__item--active' : ''}`} >
+      <Link to={'/'} className={`locations__item-link tabs__item ${city.name === activeTab ? 'tabs__item--active' : ''}`} >
         <span>{city.name}</span>
       </Link>
     </li>

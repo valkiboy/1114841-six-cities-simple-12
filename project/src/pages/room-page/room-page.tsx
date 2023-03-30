@@ -22,13 +22,13 @@ function RoomPage({ reviews, offers, citys }: RoomPageProps): JSX.Element {
   const classNaming = 'property';
 
   if (offer === undefined) {
-    return <Navigate to={AppRoute.PageNotFound} />;
+    return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
   const { rating, title, type, bedrooms, maxAdults, host, goods, images, isPremium, id } = offer;
 
   return (
-    <>
+    <div className="page">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
@@ -158,7 +158,7 @@ function RoomPage({ reviews, offers, citys }: RoomPageProps): JSX.Element {
 
         </div>
       </main>
-    </>
+    </div>
   );
 }
 

@@ -1,13 +1,14 @@
-
-
 type SortItemProps = {
   activeItem: string;
   item: string;
+  isCloseHandler:() => void;
 }
 
-function SortItem({activeItem, item }:SortItemProps): JSX.Element {
+function SortItem({activeItem, item, isCloseHandler }:SortItemProps): JSX.Element {
+
+
   return (
-    <li className={`places__option ${item === activeItem ? 'places__option--active' : ''}`} tabIndex={0}>{item}</li>
+    <li className={`places__option ${item === activeItem ? 'places__option--active' : ''}`} onClick={isCloseHandler} tabIndex={0}>{item}</li>
   );
 }
 

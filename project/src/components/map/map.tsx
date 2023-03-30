@@ -32,10 +32,15 @@ function Map({ offers, city, activeItem, classNaming }: MapProps): JSX.Element {
 
 
   useEffect(() => {
-    //TODO
-    // eslint-disable-next-line
-    console.log('отработал юзЭффект')
+
+    const markers: Marker[] = [];
+
     if (map) {
+
+      // смещает центр карты
+      map.panTo([city.location.latitude, city.location.longitude]);
+
+
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
@@ -49,11 +54,14 @@ function Map({ offers, city, activeItem, classNaming }: MapProps): JSX.Element {
               : defaultCustomIcon
           )
           .addTo(map);
+
+        markers.push(marker);
       });
-      //TODO
+
       return () => {
-        // eslint-disable-next-line
-        console.log('отработал ретурн')
+        for (const marker of markers) {
+          marker.removeFrom(map);
+        }
       };
     }
 

@@ -6,6 +6,8 @@ import Map from '../map/map';
 import { Navigate } from 'react-router-dom';
 import { AppRoute } from '../../common/const';
 import PlacesSorting from '../places-sorting/places-sorting';
+import { useAppSelector } from '../../hooks/index';
+import { SortTypes } from '../../common/const';
 
 type ListProps = {
   city: City;
@@ -17,15 +19,30 @@ function OfferList({ city, currentOffers, activeTab }: ListProps): JSX.Element {
 
   const [activeItem, setActiveItem] = useState<number | null>(-1);
   const classNaming = 'cities';
+  const currentSort = useAppSelector((state) => state.sorting);
+
 
   if (activeItem === null) {
-    return <Navigate to={AppRoute.PageNotFound} />;
+    return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
 
+  const getSortingOffers = () => {
+    switch (currentSort) {
+      case SortTypes.LowToHigh:
+        return currentOffers.sort((a, b) => a.price - b.price);
+      case SortTypes.HighToLow:
+        return currentOffers.sort((b, a) => a.price - b.price);
+      case SortTypes.Rating:
+        return currentOffers.sort((b, a) => a.rating - b.rating);
+    }
+    return currentOffers;
+  };
+
+  const sortedOffers = getSortingOffers();
   // TODO строка для линтера
   // eslint-disable-next-line
-  // console.log('city', city)
+  // console.log('currentSort', currentSort)
 
   return (
     <div className={`cities__places-container container ${currentOffers.length === 0 ? 'cities__places-container--empty' : ''}`}>
@@ -38,7 +55,7 @@ function OfferList({ city, currentOffers, activeTab }: ListProps): JSX.Element {
 
           <div className="cities__places-list places__list tabs__content">
 
-            {currentOffers.map((offer) => (
+            {sortedOffers.map((offer) => (
               <OfferCard setActiveItem={setActiveItem} key={offer.id} offer={offer} />)
             )}
 

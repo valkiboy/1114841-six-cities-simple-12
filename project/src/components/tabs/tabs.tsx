@@ -1,20 +1,20 @@
-import { City } from '../../types/offer';
+import { Cities } from '../../common/const';
 import TabsItem from '../tabs-item/tabs-item';
 
 
 type TabsProps = {
-  citys: City[];
   activeTab: string;
 }
 
-function Tabs({ citys, activeTab }: TabsProps): JSX.Element {
+
+function Tabs({activeTab }: TabsProps): JSX.Element {
 
   return (
     <div className="tabs">
       <section className="locations container">
         <ul className="locations__list tabs__list">
 
-          {citys.map((city, index) => (
+          {Object.values(Cities).map((city: string, index: number) => (
             <TabsItem key={String(city) + String(index)} city={city} activeTab={activeTab} />
           ))}
 

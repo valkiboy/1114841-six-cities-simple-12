@@ -1,22 +1,18 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams, Navigate } from 'react-router-dom';
-import Logo from '../../components/logo/logo';
-import { Reviews, Offer, City } from '../../types/offer';
+import Header from '../../components/header/header';
 import PropertyImage from '../../components/property-image/property-image';
 import PropertyItem from '../../components/propery-item/property-item';
 import changeRating from '../../common/utils';
 import { AppRoute } from '../../common/const';
-import ReviewsList from '../../components/reviews-list/reviews-list';
+// import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import PlacesList from '../../components/places-list/places-list';
+import { useAppSelector } from '../../hooks/index';
 
-type RoomPageProps = {
-  reviews: Reviews[];
-  offers: Offer[];
-  citys: City[];
-}
+function RoomPage(): JSX.Element {
 
-function RoomPage({ reviews, offers, citys }: RoomPageProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const idRoom = useParams<string>();
   const offer = offers.find((item) => String(item.id) === String(idRoom.id));
   const classNaming = 'property';
@@ -25,34 +21,12 @@ function RoomPage({ reviews, offers, citys }: RoomPageProps): JSX.Element {
     return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
-  const { rating, title, type, bedrooms, maxAdults, host, goods, images, isPremium, id } = offer;
+  const { rating, title, type, bedrooms, maxAdults, host, goods, images, isPremium, id, city } = offer;
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <div className="header__nav-profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </div>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+
+      <Header />
 
       <main className="page__main page__main--property">
         <Helmet>
@@ -144,12 +118,12 @@ function RoomPage({ reviews, offers, citys }: RoomPageProps): JSX.Element {
                 </div>
               </div>
 
-              <ReviewsList reviews={reviews} />
+              {/* <ReviewsList /> */}
 
             </div>
           </div>
 
-          <Map offers={offers} classNaming={classNaming} city={citys[0]} activeItem={id} />
+          <Map offers={offers} classNaming={classNaming} city={city} activeItem={id} />
 
         </section>
         <div className="container">

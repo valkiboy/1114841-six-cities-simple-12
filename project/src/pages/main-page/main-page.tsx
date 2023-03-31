@@ -1,59 +1,38 @@
 import OfferList from '../../components/offer-list/offer-list';
-import Logo from '../../components/logo/logo';
-import { Offer, City } from '../../types/offer';
+import Header from '../../components/header/header';
 import Tabs from '../../components/tabs/tabs';
 import { useAppSelector } from '../../hooks/index';
 import { Navigate } from 'react-router-dom';
 import { AppRoute } from '../../common/const';
 
-type MainPageProps = {
-  offers: Offer[];
-  citys: City[];
-}
-
-function MainPage({ offers, citys }: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
 
   const activeTab = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state) => state.offers);
   const currentOffers = offers.filter((offer) => offer.city.name === activeTab);
 
 
-  const city = citys.find((item) => item.name === activeTab);
+  const offer = currentOffers.find((currentOffer) => currentOffer.city.name === activeTab);
+  const city = offer?.city;
+
+  // TODO строка для линтера
+  // eslint-disable-next-line
+  // console.log('city', city)
 
   if (city === undefined) {
-    return <Navigate to={AppRoute.PageNotFound} replace/>;
+    return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
   return (
     <div className="page page--gray page--main">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <div className="header__nav-profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </div>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+
+      <Header />
+
 
       <main className={`page__main page__main--index ${currentOffers.length === 0 ? 'page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
 
-        <Tabs citys={citys} activeTab={activeTab} />
+        <Tabs activeTab={activeTab} />
 
         <div className="cities">
 

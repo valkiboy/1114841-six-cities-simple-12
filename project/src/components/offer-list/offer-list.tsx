@@ -1,5 +1,6 @@
 import OfferCard from '../offer-card/offer-card';
-import { Offer, City } from '../../types/offer';
+import { Offer } from '../../types/offer';
+import { City } from '../../types/offer';
 import { useState } from 'react';
 import NoPlaces from '../no-places/no-places';
 import Map from '../map/map';
@@ -40,9 +41,6 @@ function OfferList({ city, currentOffers, activeTab }: ListProps): JSX.Element {
   };
 
   const sortedOffers = getSortingOffers();
-  // TODO строка для линтера
-  // eslint-disable-next-line
-  // console.log('currentSort', currentSort)
 
   return (
     <div className={`cities__places-container container ${currentOffers.length === 0 ? 'cities__places-container--empty' : ''}`}>

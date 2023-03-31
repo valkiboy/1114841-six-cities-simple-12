@@ -1,4 +1,5 @@
-import { Offer, City } from '../../types/offer';
+import { Offer } from '../../types/offer';
+import { City } from '../../types/offer';
 import { useRef, useEffect } from 'react';
 import { URL_MARKER_CURRENT, URL_MARKER_DEFAULT } from '../../common/const';
 import useMap from '../../hooks/useMap/useMap';

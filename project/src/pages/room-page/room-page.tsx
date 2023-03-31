@@ -1,24 +1,18 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams, Navigate } from 'react-router-dom';
 import Header from '../../components/header/header';
-import { Reviews, Offer, City } from '../../types/offer';
 import PropertyImage from '../../components/property-image/property-image';
 import PropertyItem from '../../components/propery-item/property-item';
 import changeRating from '../../common/utils';
 import { AppRoute } from '../../common/const';
-import ReviewsList from '../../components/reviews-list/reviews-list';
+// import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import PlacesList from '../../components/places-list/places-list';
-import { AuthorizationStatus } from '../../common/const';
+import { useAppSelector } from '../../hooks/index';
 
-type RoomPageProps = {
-  reviews: Reviews[];
-  offers: Offer[];
-  citys: City[];
-  authorizationStatus: AuthorizationStatus;
-}
+function RoomPage(): JSX.Element {
 
-function RoomPage({ reviews, offers, citys, authorizationStatus }: RoomPageProps): JSX.Element {
+  const offers = useAppSelector((state) => state.offers);
   const idRoom = useParams<string>();
   const offer = offers.find((item) => String(item.id) === String(idRoom.id));
   const classNaming = 'property';
@@ -27,12 +21,12 @@ function RoomPage({ reviews, offers, citys, authorizationStatus }: RoomPageProps
     return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
-  const { rating, title, type, bedrooms, maxAdults, host, goods, images, isPremium, id } = offer;
+  const { rating, title, type, bedrooms, maxAdults, host, goods, images, isPremium, id, city } = offer;
 
   return (
     <div className="page">
 
-      <Header authorizationStatus={authorizationStatus} />
+      <Header />
 
       <main className="page__main page__main--property">
         <Helmet>
@@ -124,12 +118,12 @@ function RoomPage({ reviews, offers, citys, authorizationStatus }: RoomPageProps
                 </div>
               </div>
 
-              <ReviewsList reviews={reviews} authorizationStatus={authorizationStatus} />
+              {/* <ReviewsList /> */}
 
             </div>
           </div>
 
-          <Map offers={offers} classNaming={classNaming} city={citys[0]} activeItem={id} />
+          <Map offers={offers} classNaming={classNaming} city={city} activeItem={id} />
 
         </section>
         <div className="container">

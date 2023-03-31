@@ -1,25 +1,23 @@
 import OfferList from '../../components/offer-list/offer-list';
 import Header from '../../components/header/header';
-import { Offer, City } from '../../types/offer';
 import Tabs from '../../components/tabs/tabs';
 import { useAppSelector } from '../../hooks/index';
 import { Navigate } from 'react-router-dom';
 import { AppRoute } from '../../common/const';
-import { AuthorizationStatus } from '../../common/const';
 
-type MainPageProps = {
-  offers: Offer[];
-  citys: City[];
-  authorizationStatus: AuthorizationStatus;
-}
-
-function MainPage({ offers, citys, authorizationStatus }: MainPageProps): JSX.Element {
+function MainPage(): JSX.Element {
 
   const activeTab = useAppSelector((state) => state.city);
+  const offers = useAppSelector((state) => state.offers);
   const currentOffers = offers.filter((offer) => offer.city.name === activeTab);
 
 
-  const city = citys.find((item) => item.name === activeTab);
+  const offer = currentOffers.find((currentOffer) => currentOffer.city.name === activeTab);
+  const city = offer?.city;
+
+  // TODO строка для линтера
+  // eslint-disable-next-line
+  // console.log('city', city)
 
   if (city === undefined) {
     return <Navigate to={AppRoute.PageNotFound} replace />;
@@ -28,13 +26,13 @@ function MainPage({ offers, citys, authorizationStatus }: MainPageProps): JSX.El
   return (
     <div className="page page--gray page--main">
 
-      <Header authorizationStatus={authorizationStatus} />
+      <Header />
 
 
       <main className={`page__main page__main--index ${currentOffers.length === 0 ? 'page__main--index-empty' : ''}`}>
         <h1 className="visually-hidden">Cities</h1>
 
-        <Tabs citys={citys} activeTab={activeTab} />
+        <Tabs activeTab={activeTab} />
 
         <div className="cities">
 

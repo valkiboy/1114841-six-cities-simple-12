@@ -1,6 +1,3 @@
-export const DEFAULT_CITY = 'Paris';
-export const DEFAULT_SORT_TYPE = 'Popular';
-
 export enum AppRoute {
   Root = '/',
   Login = '/login',
@@ -26,3 +23,21 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+export enum Cities {
+  Paris = 'Paris',
+  Cologne = 'Cologne',
+  Brussels = 'Brussels',
+  Amsterdam = 'Amsterdam',
+  Hamburg = 'Hamburg',
+  Dusseldorf = 'Dusseldorf'
+}
+
+export const DEFAULT_CITY = Cities.Paris;
+export const DEFAULT_SORT_TYPE = SortTypes.Popular;

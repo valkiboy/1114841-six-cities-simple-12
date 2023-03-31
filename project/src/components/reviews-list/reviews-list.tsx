@@ -1,5 +1,5 @@
 import ReviewForm from '../../components/review-form/review-form';
-import { Reviews } from '../../types/offer';
+import { Reviews } from '../../types/reviews';
 import ReviewItem from '../review-item/review-item';
 import { AuthorizationStatus } from '../../common/const';
 

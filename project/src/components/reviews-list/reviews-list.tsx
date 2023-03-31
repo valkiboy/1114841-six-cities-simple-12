@@ -1,12 +1,14 @@
 import ReviewForm from '../../components/review-form/review-form';
 import { Reviews } from '../../types/offer';
 import ReviewItem from '../review-item/review-item';
+import { AuthorizationStatus } from '../../common/const';
 
 type ReviewsListProps = {
   reviews: Reviews[];
+  authorizationStatus: AuthorizationStatus;
 }
 
-function ReviewsList({ reviews }: ReviewsListProps): JSX.Element {
+function ReviewsList({ reviews, authorizationStatus }: ReviewsListProps): JSX.Element {
 
   return (
     <section className="property__reviews reviews">
@@ -18,8 +20,9 @@ function ReviewsList({ reviews }: ReviewsListProps): JSX.Element {
         ))}
 
       </ul>
+      {authorizationStatus === AuthorizationStatus.Auth
+        ? <ReviewForm /> : ''}
 
-      <ReviewForm />
 
     </section>
   );

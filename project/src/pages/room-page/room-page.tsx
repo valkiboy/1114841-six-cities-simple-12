@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 import { useParams, Navigate } from 'react-router-dom';
-import Logo from '../../components/logo/logo';
+import Header from '../../components/header/header';
 import { Reviews, Offer, City } from '../../types/offer';
 import PropertyImage from '../../components/property-image/property-image';
 import PropertyItem from '../../components/propery-item/property-item';
@@ -9,14 +9,16 @@ import { AppRoute } from '../../common/const';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import PlacesList from '../../components/places-list/places-list';
+import { AuthorizationStatus } from '../../common/const';
 
 type RoomPageProps = {
   reviews: Reviews[];
   offers: Offer[];
   citys: City[];
+  authorizationStatus: AuthorizationStatus;
 }
 
-function RoomPage({ reviews, offers, citys }: RoomPageProps): JSX.Element {
+function RoomPage({ reviews, offers, citys, authorizationStatus }: RoomPageProps): JSX.Element {
   const idRoom = useParams<string>();
   const offer = offers.find((item) => String(item.id) === String(idRoom.id));
   const classNaming = 'property';
@@ -29,30 +31,8 @@ function RoomPage({ reviews, offers, citys }: RoomPageProps): JSX.Element {
 
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Logo />
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <div className="header__nav-profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                  </div>
-                </li>
-                <li className="header__nav-item">
-                  <a className="header__nav-link" href="#">
-                    <span className="header__signout">Sign out</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+
+      <Header authorizationStatus={authorizationStatus} />
 
       <main className="page__main page__main--property">
         <Helmet>
@@ -144,7 +124,7 @@ function RoomPage({ reviews, offers, citys }: RoomPageProps): JSX.Element {
                 </div>
               </div>
 
-              <ReviewsList reviews={reviews} />
+              <ReviewsList reviews={reviews} authorizationStatus={authorizationStatus} />
 
             </div>
           </div>

@@ -1,4 +1,5 @@
 export const DEFAULT_CITY = 'Paris';
+export const DEFAULT_SORT_TYPE = 'Popular';
 
 export enum AppRoute {
   Root = '/',
@@ -20,4 +21,8 @@ export enum SortTypes {
   Rating = 'Top rated first'
 }
 
-export const DEFAULT_SORT_TYPE = 'Popular';
+export enum AuthorizationStatus {
+  Auth = 'AUTH',
+  NoAuth = 'NO_AUTH',
+  Unknown = 'UNKNOWN',
+}

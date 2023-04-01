@@ -41,3 +41,4 @@ export enum Cities {
 
 export const DEFAULT_CITY = Cities.Paris;
 export const DEFAULT_SORT_TYPE = SortTypes.Popular;
+export const TIMEOUT_SHOW_ERROR = 2000;

@@ -24,6 +24,10 @@ function App(): JSX.Element {
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const isOffersDataLoading: boolean = useAppSelector((state) => state.isOffersDataLoading);
 
+  // TODO строка для линтера
+  // eslint-disable-next-line
+  console.log('authorizationStatus', authorizationStatus)
+
   if (authorizationStatus === AuthorizationStatus.Unknown || isOffersDataLoading) {
     return (
       <LoadingScreen />

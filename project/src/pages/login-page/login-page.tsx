@@ -13,7 +13,8 @@ import { AuthData } from '../../types/auth-data';
 import { AppRoute, AuthorizationStatus } from '../../common/const';
 
 function LoginPage(): JSX.Element {
-
+  //TODO вопрос
+  //как пробрасывать логин для отрисовки
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
@@ -38,7 +39,7 @@ function LoginPage(): JSX.Element {
         password: passwordRef.current.value,
       });
 
-      //TODO
+      //TODO вопрос
       // Спросить почему не работает с навигейтом
       // navigate(AppRoute.Root);
 

@@ -1,13 +1,21 @@
 import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
 import { AuthorizationStatus } from '../../common/const';
-import { useAppSelector } from '../../hooks/index';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { logoutAction } from '../../store/api-actions';
 
 
 function Header(): JSX.Element {
 
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const dispatch = useAppDispatch();
 
+  const signOutHandler = (evt: React.SyntheticEvent) => {
+    evt.preventDefault();
+    dispatch(logoutAction());
+  };
+  //TODO вопрос
+  // 37 строка как остаться на этой же странице
   return (
     authorizationStatus === AuthorizationStatus.Auth
       ?
@@ -26,7 +34,7 @@ function Header(): JSX.Element {
                   </div>
                 </li>
                 <li className="header__nav-item">
-                  <Link to={'/'} className="header__nav-link" >
+                  <Link to={''} className="header__nav-link" onClick={signOutHandler}>
                     <span className="header__signout">Sign out</span>
                   </Link>
                 </li>

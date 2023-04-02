@@ -10,7 +10,7 @@ export type Offer = {
   maxAdults: number;
   goods: string[];
   host: Host;
-  id: number;
+  id: OfferId;
   previewImage: string;
   location: {
     latitude: number;
@@ -37,3 +37,5 @@ export type Host = {
 }
 
 export type ApartmentType = 'Apartment' | 'Private Room' | 'House' | 'Hotel';
+export type OfferId = number;
+export type Offers = Offer[];

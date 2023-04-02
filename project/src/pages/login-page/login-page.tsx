@@ -1,26 +1,20 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
-// import { Link } from 'react-router-dom';
 import { Link, Navigate } from 'react-router-dom';
-// import { Link, useNavigate } from 'react-router-dom';
-// import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useRef, FormEvent } from 'react';
-// import { useAppDispatch } from '../../hooks/index';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
-// import { AppRoute } from '../../common/const';
 import { AppRoute, AuthorizationStatus } from '../../common/const';
 
 function LoginPage(): JSX.Element {
   //TODO вопрос
-  //как пробрасывать логин для отрисовки
+  //как пробрасывать логин для отрисовки ответ запросить с сервера
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   const dispatch = useAppDispatch();
-  // const navigate = useNavigate();
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -38,11 +32,6 @@ function LoginPage(): JSX.Element {
         login: loginRef.current.value,
         password: passwordRef.current.value,
       });
-
-      //TODO вопрос
-      // Спросить почему не работает с навигейтом
-      // navigate(AppRoute.Root);
-
     }
   };
 

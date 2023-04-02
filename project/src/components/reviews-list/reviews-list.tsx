@@ -1,10 +1,10 @@
 import ReviewForm from '../../components/review-form/review-form';
-import { Reviews } from '../../types/reviews';
+import { Review } from '../../types/review';
 import ReviewItem from '../review-item/review-item';
 import { AuthorizationStatus } from '../../common/const';
 
 type ReviewsListProps = {
-  reviews: Reviews[];
+  reviews: Review[];
   authorizationStatus: AuthorizationStatus;
 }
 

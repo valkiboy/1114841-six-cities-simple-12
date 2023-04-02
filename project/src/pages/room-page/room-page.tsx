@@ -8,20 +8,52 @@ import { AppRoute } from '../../common/const';
 // import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import PlacesList from '../../components/places-list/places-list';
-import { useAppSelector } from '../../hooks/index';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
+// import { useAppSelector } from '../../hooks/index';
+import { useEffect } from 'react';
+import { fetchCurrentOfferAction, fetchOffersNearbyAction } from '../../store/api-actions';
+import { Offer } from '../../types/offer';
+import { store } from '../../store';
 
 function RoomPage(): JSX.Element {
 
-  const offers = useAppSelector((state) => state.offers);
-  const idRoom = useParams<string>();
-  const offer = offers.find((item) => String(item.id) === String(idRoom.id));
+  const offerId = useParams<string>();
   const classNaming = 'property';
+  const currentOfferId = Number(offerId.id);
 
-  if (offer === undefined) {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    store.dispatch(fetchCurrentOfferAction(currentOfferId));
+    store.dispatch(fetchOffersNearbyAction(currentOfferId));
+
+  }, [currentOfferId, dispatch]);
+
+  const currentOffer = useAppSelector((state) => state.currentOffer);
+  const offersNearby = useAppSelector((state) => state.offersNearby);
+
+  let allOffers: Offer[] = [];
+
+  if (offersNearby !== null && currentOffer !== null) {
+    allOffers = [...offersNearby, currentOffer];
+  }
+
+
+  // TODO строка для линтера
+  // eslint-disable-next-line
+  console.log('currentOfferId', currentOfferId)
+  // eslint-disable-next-line
+  console.log('currentOffer', currentOffer)
+  // eslint-disable-next-line
+  console.log('offersNearby', offersNearby)
+  // eslint-disable-next-line
+  console.log('allOffers', allOffers)
+
+  if (currentOffer === null) {
     return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
-  const { rating, title, type, bedrooms, maxAdults, host, goods, images, isPremium, id, city } = offer;
+  const { rating, title, type, bedrooms, maxAdults, host, goods, images, isPremium, id, city, price } = currentOffer;
 
   return (
     <div className="page">
@@ -62,7 +94,7 @@ function RoomPage(): JSX.Element {
                   <span style={{ width: changeRating(rating) }}></span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">{offer.rating}</span>
+                <span className="property__rating-value rating__value">{rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
@@ -82,7 +114,7 @@ function RoomPage(): JSX.Element {
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;{offer.price}</b>
+                <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
@@ -123,12 +155,12 @@ function RoomPage(): JSX.Element {
             </div>
           </div>
 
-          <Map offers={offers} classNaming={classNaming} city={city} activeItem={id} />
+          <Map offers={allOffers} classNaming={classNaming} city={city} activeItem={id} />
 
         </section>
         <div className="container">
 
-          <PlacesList offers={offers} num={id} />
+          <PlacesList offers={offersNearby} num={id} />
 
         </div>
       </main>

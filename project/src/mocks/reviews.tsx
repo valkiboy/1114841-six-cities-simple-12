@@ -1,6 +1,6 @@
-import { Reviews } from '../types/reviews';
+import { Review } from '../types/review';
 
-export const reviews: Reviews[] = [
+export const reviews: Review[] = [
   {
     'comment': 'A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam.',
     'date': 'Sun Mar 19 2023 11:04:24 GMT+0300 (Москва, стандартное время)',

@@ -2,7 +2,6 @@ import { HelmetProvider } from 'react-helmet-async';
 import { useAppSelector } from '../../hooks/index';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../common/const';
-// import { AppRoute } from '../../common/const';
 import MainPage from '../../pages/main-page/main-page';
 import RoomPage from '../../pages/room-page/room-page';
 import LoginPage from '../../pages/login-page/login-page';
@@ -10,14 +9,6 @@ import PageNotFound from '../../pages/not-found-page/not-found-page';
 import ScrollToTop from '../scrool-to-top/scrool-to-top';
 import PrivateRoute from '../private-route/private-route';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
-
-
-// type AppPageProps = {
-//   reviews: Reviews[];
-//   offers: Offer[];
-// cities: City[];
-// }
-
 
 function App(): JSX.Element {
 

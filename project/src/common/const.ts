@@ -28,7 +28,7 @@ export enum APIRoute {
   Offers = '/hotels',
   Login = '/login',
   Logout = '/logout',
-  Comments = '/comments'
+  Reviews = '/comments'
 }
 
 export enum Cities {
@@ -42,4 +42,5 @@ export enum Cities {
 
 export const DEFAULT_CITY = Cities.Paris;
 export const DEFAULT_SORT_TYPE = SortTypes.Popular;
-export const TIMEOUT_SHOW_ERROR = 2000;
+export const MAX_NUMBER_REVIEWS = 10;
+export const REGEX = (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{2,}$/);

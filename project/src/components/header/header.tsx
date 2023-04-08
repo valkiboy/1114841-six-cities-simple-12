@@ -8,14 +8,15 @@ import { logoutAction } from '../../store/api-actions';
 function Header(): JSX.Element {
 
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const userData = useAppSelector((state) => state.userData);
   const dispatch = useAppDispatch();
+
 
   const signOutHandler = (evt: React.SyntheticEvent) => {
     evt.preventDefault();
     dispatch(logoutAction());
   };
-  //TODO вопрос
-  // 37 строка как остаться на этой же странице
+
   return (
     authorizationStatus === AuthorizationStatus.Auth
       ?
@@ -29,8 +30,8 @@ function Header(): JSX.Element {
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
                   <div className="header__nav-profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                    <div className="header__avatar-wrapper user__avatar-wrapper" ></div>
+                    <span className="header__user-name user__name">{userData?.email}</span>
                   </div>
                 </li>
                 <li className="header__nav-item">

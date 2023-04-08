@@ -4,16 +4,15 @@ import Header from '../../components/header/header';
 import PropertyImage from '../../components/property-image/property-image';
 import PropertyItem from '../../components/propery-item/property-item';
 import changeRating from '../../common/utils';
-import { AppRoute } from '../../common/const';
-// import ReviewsList from '../../components/reviews-list/reviews-list';
+import { AppRoute, MAX_NUMBER_REVIEWS } from '../../common/const';
 import Map from '../../components/map/map';
 import PlacesList from '../../components/places-list/places-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-// import { useAppSelector } from '../../hooks/index';
 import { useEffect } from 'react';
-import { fetchCurrentOfferAction, fetchOffersNearbyAction } from '../../store/api-actions';
+import { fetchCurrentOfferAction, fetchCurrentReviewsAction, fetchOffersNearbyAction } from '../../store/api-actions';
 import { Offer } from '../../types/offer';
-import { store } from '../../store';
+import LoadingScreen from '../loading-screen/loading-screen';
+import ReviewsList from '../../components/reviews-list/reviews-list';
 
 function RoomPage(): JSX.Element {
 
@@ -24,13 +23,20 @@ function RoomPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    store.dispatch(fetchCurrentOfferAction(currentOfferId));
-    store.dispatch(fetchOffersNearbyAction(currentOfferId));
-
+    dispatch(fetchCurrentOfferAction(currentOfferId));
+    dispatch(fetchOffersNearbyAction(currentOfferId));
+    dispatch(fetchCurrentReviewsAction(currentOfferId));
   }, [currentOfferId, dispatch]);
 
   const currentOffer = useAppSelector((state) => state.currentOffer);
   const offersNearby = useAppSelector((state) => state.offersNearby);
+  const isCurrentOfferLoading = useAppSelector((state) => state.isCurrentOfferLoading);
+  const currentReviews = useAppSelector((state) => state.currentReviews);
+
+
+  let sortingReviews = currentReviews.slice();
+  sortingReviews = sortingReviews.sort((b, a) => new Date(a.date).getTime() - new Date(b.date).getTime()).slice(0, MAX_NUMBER_REVIEWS);
+
 
   let allOffers: Offer[] = [];
 
@@ -38,22 +44,15 @@ function RoomPage(): JSX.Element {
     allOffers = [...offersNearby, currentOffer];
   }
 
-
-  // TODO строка для линтера
-  // eslint-disable-next-line
-  console.log('currentOfferId', currentOfferId)
-  // eslint-disable-next-line
-  console.log('currentOffer', currentOffer)
-  // eslint-disable-next-line
-  console.log('offersNearby', offersNearby)
-  // eslint-disable-next-line
-  console.log('allOffers', allOffers)
+  if (isCurrentOfferLoading) {
+    return < LoadingScreen />;
+  }
 
   if (currentOffer === null) {
     return <Navigate to={AppRoute.PageNotFound} replace />;
   }
 
-  const { rating, title, type, bedrooms, maxAdults, host, goods, images, isPremium, id, city, price } = currentOffer;
+  const { rating, title, type, bedrooms, maxAdults, host, goods, images, isPremium, id, city, price, description } = currentOffer;
 
   return (
     <div className="page">
@@ -130,27 +129,25 @@ function RoomPage(): JSX.Element {
               <div className="property__host">
                 <h2 className="property__host-title">Meet the host</h2>
                 <div className="property__host-user user">
-                  <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
+                  <div className={`property__avatar-wrapper user__avatar-wrapper ${host.isPro ? 'property__avatar-wrapper--pro' : ''} `}>
                     <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
                     {host.name}
                   </span>
-                  <span className="property__user-status">
-                    Pro
-                  </span>
+                  {host.isPro ?
+                    <span className="property__user-status">
+                      Pro
+                    </span> : ''}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
-                  </p>
-                  <p className="property__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
+                    {description}
                   </p>
                 </div>
               </div>
 
-              {/* <ReviewsList /> */}
+              <ReviewsList reviews={sortingReviews} currentOfferId={currentOfferId} />
 
             </div>
           </div>

@@ -1,7 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, changeSort, loadOffers, requireAuthorization, setOffersDataLoadingStatus, setError, loadCurrentOffer, loadOffersNearby } from './action';
+import { changeCity, changeSort, loadOffers, requireAuthorization, setOffersDataLoadingStatus, loadCurrentOffer, loadOffersNearby, setCurrentOfferLoadingStatus, loadCurrentReviews, loadUserData, setReviewIsLoading } from './action';
 import { DEFAULT_CITY, DEFAULT_SORT_TYPE, AuthorizationStatus } from '../common/const';
 import { Offer } from '../types/offer';
+import { Review } from '../types/review';
+import { UserData } from '../types/user-data';
 
 
 type InitialState = {
@@ -10,9 +12,12 @@ type InitialState = {
   sorting: string;
   authorizationStatus: AuthorizationStatus;
   isOffersDataLoading: boolean;
-  error: string | null;
+  isCurrentOfferLoading: boolean;
   currentOffer: Offer | null;
+  currentReviews: Review[];
   offersNearby: Offer[] | [];
+  userData: UserData | null;
+  reviewIsLoading: boolean;
 };
 
 
@@ -22,9 +27,12 @@ const initialState: InitialState = {
   sorting: DEFAULT_SORT_TYPE,
   authorizationStatus: AuthorizationStatus.Unknown,
   isOffersDataLoading: false,
-  error: null,
+  isCurrentOfferLoading: true,
   currentOffer: null,
+  currentReviews: [],
   offersNearby: [],
+  userData: null,
+  reviewIsLoading: false,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -49,12 +57,24 @@ const reducer = createReducer(initialState, (builder) => {
       state.isOffersDataLoading = action.payload;
     })
 
-    .addCase(setError, (state, action) => {
-      state.error = action.payload;
+    .addCase(setCurrentOfferLoadingStatus, (state, action) => {
+      state.isCurrentOfferLoading = action.payload;
     })
 
     .addCase(loadCurrentOffer, (state, action) => {
       state.currentOffer = action.payload;
+    })
+
+    .addCase(loadCurrentReviews, (state, action) => {
+      state.currentReviews = action.payload;
+    })
+
+    .addCase(setReviewIsLoading, (state, action) => {
+      state.reviewIsLoading = action.payload;
+    })
+
+    .addCase(loadUserData, (state, action) => {
+      state.userData = action.payload;
     })
 
     .addCase(loadOffersNearby, (state, action) => {

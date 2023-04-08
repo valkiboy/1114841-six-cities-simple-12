@@ -7,7 +7,10 @@ type ReviewItemProps = {
 
 function ReviewItem({ review }: ReviewItemProps): JSX.Element {
 
-  const { comment, rating, user } = review;
+  const { comment, rating, user, date } = review;
+
+  const itemDate = new Date(date);
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">
@@ -28,7 +31,7 @@ function ReviewItem({ review }: ReviewItemProps): JSX.Element {
         <p className="reviews__text">
           {comment}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <time className="reviews__time" dateTime={`${itemDate.getFullYear()}-${itemDate.getMonth()}-${itemDate.getDate()}`}>{itemDate.toLocaleDateString('en-EN', { month: 'long' })} {itemDate.getFullYear()}</time>
       </div>
     </li>
   );

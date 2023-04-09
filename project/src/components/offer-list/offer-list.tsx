@@ -31,11 +31,11 @@ function OfferList({ city, currentOffers, activeTab }: ListProps): JSX.Element {
   const getSortingOffers = () => {
     switch (currentSort) {
       case SortTypes.LowToHigh:
-        return currentOffers.sort((a, b) => a.price - b.price);
+        return [...currentOffers].sort((a, b) => a.price - b.price);
       case SortTypes.HighToLow:
-        return currentOffers.sort((b, a) => a.price - b.price);
+        return [...currentOffers].sort((b, a) => a.price - b.price);
       case SortTypes.Rating:
-        return currentOffers.sort((b, a) => a.rating - b.rating);
+        return [...currentOffers].sort((b, a) => a.rating - b.rating);
     }
     return currentOffers;
   };

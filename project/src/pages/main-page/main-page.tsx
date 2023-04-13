@@ -5,13 +5,16 @@ import { useAppSelector } from '../../hooks/index';
 import { Navigate } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../common/const';
 import LoginPage from '../login-page/login-page';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
+import { getOffers } from '../../store/offers-data/offers-data.selectors';
+import { getCity } from '../../store/sorting-process/sorting-process.selectors';
 
 function MainPage(): JSX.Element {
 
-  const activeTab = useAppSelector((state) => state.city);
-  const offers = useAppSelector((state) => state.offers);
+  const activeTab = useAppSelector(getCity);
+  const offers = useAppSelector(getOffers);
   const currentOffers = offers.filter((offer) => offer.city.name === activeTab);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
 
   const offer = currentOffers.find((currentOffer) => currentOffer.city.name === activeTab);
@@ -20,7 +23,6 @@ function MainPage(): JSX.Element {
   if (authorizationStatus === AuthorizationStatus.NoAuth) {
     return (<LoginPage />);
   }
-
 
   if (city === undefined) {
     return <Navigate to={AppRoute.PageNotFound} replace />;

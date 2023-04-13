@@ -1,23 +1,19 @@
 import { Helmet } from 'react-helmet-async';
 import Logo from '../../components/logo/logo';
 import { Link, Navigate } from 'react-router-dom';
-import { useRef, FormEvent, useState } from 'react';
+import { useRef, FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
 import { AppRoute, AuthorizationStatus, REGEX } from '../../common/const';
 import { toast } from 'react-toastify';
+import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 
 function LoginPage(): JSX.Element {
 
   const loginRef = useRef<HTMLInputElement | null>(null);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-
-  const [valuePass, setValuePass] = useState<string>('');
-
-  const passwordChangeHandler = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setValuePass(event.target.value);
-  };
+  const passwordRef = useRef<HTMLInputElement | null>(null);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const dispatch = useAppDispatch();
 
@@ -32,17 +28,16 @@ function LoginPage(): JSX.Element {
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
 
-    if (loginRef.current !== null && valuePass !== null) {
-      if (REGEX.test(valuePass)) {
-        onSubmit({
-          login: loginRef.current.value,
-          password: valuePass,
-        });
-      } else {
-        toast.warn('Пароль должен содержать хотя бы одну цифру и букву');
-      }
+    if (loginRef.current !== null && passwordRef.current !== null && REGEX.test(passwordRef.current.value)) {
+      onSubmit({
+        login: loginRef.current.value,
+        password: passwordRef.current.value,
+      });
+    } else {
+      toast.warn('Пароль должен содержать хотя бы одну цифру и букву');
     }
   };
+
 
   return (
     <div className="page page--gray page--login">
@@ -84,8 +79,7 @@ function LoginPage(): JSX.Element {
                   type="password"
                   name="password"
                   id="password"
-                  onChange={passwordChangeHandler}
-                  value={valuePass}
+                  ref={passwordRef}
                   required
                 />
               </div>

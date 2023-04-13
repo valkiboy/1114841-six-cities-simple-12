@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/index/index';
-import { changeCity } from '../../store/action';
+import { changeCity } from '../../store/sorting-process/sorting-process';
 
 type TabsItemProps = {
   city: string;

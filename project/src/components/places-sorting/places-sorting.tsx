@@ -1,13 +1,14 @@
 import { RefObject, useEffect, useRef, useState } from 'react';
 import { SortTypes } from '../../common/const';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { changeSort } from '../../store/action';
 import SortItem from '../sort-item/sort-item';
+import { getTypeSorting } from '../../store/sorting-process/sorting-process.selectors';
+import { changeSort } from '../../store/sorting-process/sorting-process';
 
 function PlacesSorting(): JSX.Element {
 
   const [isClosed, setIsClosed] = useState<boolean>(true);
-  const activeItem = useAppSelector((state) => state.sorting);
+  const activeItem = useAppSelector(getTypeSorting);
   const sortRef: RefObject<HTMLSpanElement> = useRef(null);
   const dispatch = useAppDispatch();
 

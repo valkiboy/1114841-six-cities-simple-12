@@ -9,6 +9,7 @@ import { AppRoute } from '../../common/const';
 import PlacesSorting from '../places-sorting/places-sorting';
 import { useAppSelector } from '../../hooks/index';
 import { SortTypes } from '../../common/const';
+import { getTypeSorting } from '../../store/sorting-process/sorting-process.selectors';
 
 type ListProps = {
   city: City;
@@ -20,7 +21,7 @@ function OfferList({ city, currentOffers, activeTab }: ListProps): JSX.Element {
 
   const [activeItem, setActiveItem] = useState<number | null>(-1);
   const classNaming = 'cities';
-  const currentSort = useAppSelector((state) => state.sorting);
+  const currentSort = useAppSelector(getTypeSorting);
 
 
   if (activeItem === null) {
@@ -31,11 +32,11 @@ function OfferList({ city, currentOffers, activeTab }: ListProps): JSX.Element {
   const getSortingOffers = () => {
     switch (currentSort) {
       case SortTypes.LowToHigh:
-        return currentOffers.sort((a, b) => a.price - b.price);
+        return [...currentOffers].sort((a, b) => a.price - b.price);
       case SortTypes.HighToLow:
-        return currentOffers.sort((b, a) => a.price - b.price);
+        return [...currentOffers].sort((b, a) => a.price - b.price);
       case SortTypes.Rating:
-        return currentOffers.sort((b, a) => a.rating - b.rating);
+        return [...currentOffers].sort((b, a) => a.rating - b.rating);
     }
     return currentOffers;
   };

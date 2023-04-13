@@ -2,6 +2,7 @@ import { FormEvent, Fragment, useState } from 'react';
 import { UserReview } from '../../types/user-review';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { reviewAction } from '../../store/api-actions';
+import { getReviewIsLoading } from '../../store/offers-data/offers-data.selectors';
 
 
 type ReviewsFormProps = {
@@ -13,7 +14,7 @@ function ReviewForm({currentOfferId}: ReviewsFormProps): JSX.Element {
   const [value, setValue] = useState<string>('');
   const [assessment, setAssessment] = useState<string>('0');
 
-  const isLoading = useAppSelector((state) => state.reviewIsLoading);
+  const isLoading = useAppSelector(getReviewIsLoading);
 
 
   const textareaChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {

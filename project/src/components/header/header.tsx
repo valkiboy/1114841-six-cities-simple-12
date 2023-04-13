@@ -3,18 +3,24 @@ import Logo from '../logo/logo';
 import { AuthorizationStatus } from '../../common/const';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { logoutAction } from '../../store/api-actions';
+import { getAuthorizationStatus, getUserData } from '../../store/user-process/user-process.selectors';
 
 
 function Header(): JSX.Element {
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const userData = useAppSelector((state) => state.userData);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const userData = useAppSelector(getUserData);
   const dispatch = useAppDispatch();
-
+  const userAvatar = userData?.avatarUrl;
 
   const signOutHandler = (evt: React.SyntheticEvent) => {
     evt.preventDefault();
     dispatch(logoutAction());
+  };
+
+  const imgAvatar = {
+    backgroundImage: `url(${userAvatar !== undefined ? userAvatar : '' })`,
+    borderRadius: '50%',
   };
 
   return (
@@ -30,7 +36,7 @@ function Header(): JSX.Element {
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
                   <div className="header__nav-profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper" ></div>
+                    <div className="header__avatar-wrapper user__avatar-wrapper" style={imgAvatar} ></div>
                     <span className="header__user-name user__name">{userData?.email}</span>
                   </div>
                 </li>

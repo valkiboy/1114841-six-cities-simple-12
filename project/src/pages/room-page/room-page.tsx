@@ -4,7 +4,7 @@ import Header from '../../components/header/header';
 import PropertyImage from '../../components/property-image/property-image';
 import PropertyItem from '../../components/propery-item/property-item';
 import changeRating from '../../common/utils';
-import { AppRoute, MAX_NUMBER_REVIEWS } from '../../common/const';
+import {AppRoute, MAX_NUMBER_IMAGE, MAX_NUMBER_REVIEWS } from '../../common/const';
 import Map from '../../components/map/map';
 import PlacesList from '../../components/places-list/places-list';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
@@ -13,6 +13,7 @@ import { fetchCurrentOfferAction, fetchCurrentReviewsAction, fetchOffersNearbyAc
 import { Offer } from '../../types/offer';
 import LoadingScreen from '../loading-screen/loading-screen';
 import ReviewsList from '../../components/reviews-list/reviews-list';
+import { getCurrentOffer, getOffersNearby, getCurrentOffersDataLoading, getCurrentReviews } from '../../store/offers-data/offers-data.selectors';
 
 function RoomPage(): JSX.Element {
 
@@ -28,10 +29,10 @@ function RoomPage(): JSX.Element {
     dispatch(fetchCurrentReviewsAction(currentOfferId));
   }, [currentOfferId, dispatch]);
 
-  const currentOffer = useAppSelector((state) => state.currentOffer);
-  const offersNearby = useAppSelector((state) => state.offersNearby);
-  const isCurrentOfferLoading = useAppSelector((state) => state.isCurrentOfferLoading);
-  const currentReviews = useAppSelector((state) => state.currentReviews);
+  const currentOffer = useAppSelector(getCurrentOffer);
+  const offersNearby = useAppSelector(getOffersNearby);
+  const isCurrentOfferLoading = useAppSelector(getCurrentOffersDataLoading);
+  const currentReviews = useAppSelector(getCurrentReviews);
 
 
   let sortingReviews = currentReviews.slice();
@@ -69,7 +70,7 @@ function RoomPage(): JSX.Element {
 
               {images.map((image, index) => (
                 <PropertyImage key={String(image) + String(index)} image={image} />
-              ))}
+              )).slice(0, MAX_NUMBER_IMAGE)}
 
             </div>
           </div>

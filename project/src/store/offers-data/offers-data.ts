@@ -13,6 +13,7 @@ const initialState: OffersData = {
   offersNearby: [],
   reviewIsLoading: false,
   hasError: false,
+  textClear: false,
 };
 
 
@@ -43,28 +44,20 @@ export const offersData = createSlice({
       })
       .addCase(fetchCurrentOfferAction.rejected, (state) => {
         state.isCurrentOfferLoading = false;
-        // state.hasError = true;
-        // dispatch(redirectToRoute(AppRoute.PageNotFound));
       })
       .addCase(fetchOffersNearbyAction.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
       })
-      // .addCase(fetchOffersNearbyAction.rejected, (state) => {
-      // state.hasError = true;
-      //   dispatch(redirectToRoute(AppRoute.PageNotFound));
-      // })
       .addCase(fetchCurrentReviewsAction.fulfilled, (state, action) => {
         state.currentReviews = action.payload;
       })
-      // .addCase(fetchCurrentReviewsAction.rejected, (state) => {
-      // state.hasError = true;
-      //   dispatch(redirectToRoute(AppRoute.PageNotFound));
-      // })
       .addCase(reviewAction.pending, (state) => {
         state.reviewIsLoading = true;
+        state.textClear = false;
       })
       .addCase(reviewAction.fulfilled, (state, action) => {
         state.currentReviews = action.payload;
+        state.textClear = true;
         state.reviewIsLoading = false;
       })
       .addCase(reviewAction.rejected, (state) => {

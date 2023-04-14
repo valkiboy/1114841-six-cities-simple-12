@@ -26,10 +26,6 @@ function App(): JSX.Element {
     );
   }
 
-  //TODO строка для линтера
-  // eslint-disable-next-line
-  // console.log('state.hasError', hasError)
-
   if (hasError) {
     return (
       <ErrorScreen />);

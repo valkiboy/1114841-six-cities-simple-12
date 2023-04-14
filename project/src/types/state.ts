@@ -22,6 +22,7 @@ export type OffersData = {
   currentReviews: Review[];
   reviewIsLoading: boolean;
   hasError: boolean;
+  textClear: boolean;
 }
 
 export type SortingProcess = {

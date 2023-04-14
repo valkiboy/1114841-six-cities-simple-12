@@ -18,3 +18,5 @@ export const getCurrentOffersDataLoading = (state: State): boolean => state[Name
 export const getReviewIsLoading = (state: State): boolean => state[NameSpace.Data].reviewIsLoading;
 
 export const getErrorStatus = (state: State): boolean => state[NameSpace.Data].hasError;
+
+export const getTextClearStatus = (state: State): boolean => state[NameSpace.Data].textClear;

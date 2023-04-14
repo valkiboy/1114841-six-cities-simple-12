@@ -1,20 +1,36 @@
-import { FormEvent, Fragment, useState } from 'react';
+import { FormEvent, Fragment, useEffect, useState } from 'react';
 import { UserReview } from '../../types/user-review';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { reviewAction } from '../../store/api-actions';
-import { getReviewIsLoading } from '../../store/offers-data/offers-data.selectors';
+import { getReviewIsLoading, getTextClearStatus } from '../../store/offers-data/offers-data.selectors';
 
 
 type ReviewsFormProps = {
   currentOfferId: number;
 }
 
-function ReviewForm({currentOfferId}: ReviewsFormProps): JSX.Element {
+function ReviewForm({ currentOfferId }: ReviewsFormProps): JSX.Element {
 
   const [value, setValue] = useState<string>('');
   const [assessment, setAssessment] = useState<string>('0');
 
   const isLoading = useAppSelector(getReviewIsLoading);
+  const textClear = useAppSelector(getTextClearStatus);
+
+
+  useEffect(() => {
+    if (textClear === true) {
+      setValue('');
+    }
+
+  }, [textClear]);
+
+  // TODO Вопрос
+  // Можно ли так очищать текстареа
+
+  //TODO строка для линтера
+  // eslint-disable-next-line
+  console.log('textClear', textClear)
 
 
   const textareaChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
@@ -65,7 +81,7 @@ function ReviewForm({currentOfferId}: ReviewsFormProps): JSX.Element {
         <p className="reviews__help">
           To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled={!(value.length > 49 && value.length < 301 && Number(assessment) > 0 ) || isLoading} >Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!(value.length > 49 && value.length < 301 && Number(assessment) > 0) || isLoading} >Submit</button>
       </div>
     </form>
   );

@@ -8,6 +8,7 @@ import LoginPage from '../login-page/login-page';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
 import { getOffers } from '../../store/offers-data/offers-data.selectors';
 import { getCity } from '../../store/sorting-process/sorting-process.selectors';
+import { Helmet } from 'react-helmet-async';
 
 function MainPage(): JSX.Element {
 
@@ -35,6 +36,9 @@ function MainPage(): JSX.Element {
 
 
       <main className={`page__main page__main--index ${currentOffers.length === 0 ? 'page__main--index-empty' : ''}`}>
+        <Helmet>
+          <title>six cities simple: main</title>
+        </Helmet>
         <h1 className="visually-hidden">Cities</h1>
 
         <Tabs activeTab={activeTab} />

@@ -41,11 +41,11 @@ export const offersData = createSlice({
         state.currentOffer = action.payload;
         state.isCurrentOfferLoading = false;
       })
-      // .addCase(fetchCurrentOfferAction.rejected, (state) => {
-      // state.isCurrentOfferLoading = false;
-      // state.hasError = true;
-      // dispatch(redirectToRoute(AppRoute.PageNotFound));
-      // })
+      .addCase(fetchCurrentOfferAction.rejected, (state) => {
+        state.isCurrentOfferLoading = false;
+        // state.hasError = true;
+        // dispatch(redirectToRoute(AppRoute.PageNotFound));
+      })
       .addCase(fetchOffersNearbyAction.fulfilled, (state, action) => {
         state.offersNearby = action.payload;
       })

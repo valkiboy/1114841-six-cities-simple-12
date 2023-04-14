@@ -11,7 +11,6 @@ import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';
 import browserHistory from '../../browser-history';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
-// import { getOffersDataLoading } from '../../store/offers-data/offers-data.selectors';
 import { getErrorStatus, getOffersDataLoading } from '../../store/offers-data/offers-data.selectors';
 import ErrorScreen from '../../pages/error-screen/error-screen';
 
@@ -27,9 +26,9 @@ function App(): JSX.Element {
     );
   }
 
-  //TODO
+  //TODO строка для линтера
   // eslint-disable-next-line
-  console.log('state.hasError', hasError)
+  // console.log('state.hasError', hasError)
 
   if (hasError) {
     return (

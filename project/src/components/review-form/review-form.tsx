@@ -25,14 +25,6 @@ function ReviewForm({ currentOfferId }: ReviewsFormProps): JSX.Element {
 
   }, [textClear]);
 
-  // TODO Вопрос
-  // Можно ли так очищать текстареа
-
-  //TODO строка для линтера
-  // eslint-disable-next-line
-  console.log('textClear', textClear)
-
-
   const textareaChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
     setValue(event.target.value);
   };

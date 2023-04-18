@@ -5,9 +5,11 @@ import { useRef, FormEvent } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { loginAction } from '../../store/api-actions';
 import { AuthData } from '../../types/auth-data';
-import { AppRoute, AuthorizationStatus, REGEX } from '../../common/const';
+import { AppRoute, AuthorizationStatus, REGEX, shuffle } from '../../common/const';
 import { toast } from 'react-toastify';
 import { getAuthorizationStatus } from '../../store/user-process/user-process.selectors';
+import { Cities } from '../../common/const';
+import { changeCity } from '../../store/sorting-process/sorting-process';
 
 function LoginPage(): JSX.Element {
 
@@ -38,6 +40,12 @@ function LoginPage(): JSX.Element {
     }
   };
 
+  const newOrderCities = shuffle(Object.values(Cities));
+  const newCity = newOrderCities[0];
+
+  const changeCityHandler = () => {
+    dispatch(changeCity(newCity));
+  };
 
   return (
     <div className="page page--gray page--login">
@@ -88,8 +96,12 @@ function LoginPage(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <Link to={'/'} className="locations__item-link">
-                <span>Amsterdam</span>
+              <Link
+                to={AppRoute.Root}
+                className="locations__item-link"
+                onClick={changeCityHandler}
+              >
+                <span>{newCity}</span>
               </Link>
             </div>
           </section>

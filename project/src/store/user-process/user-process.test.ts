@@ -5,6 +5,7 @@ import { checkAuthAction, loginAction, logoutAction } from '../api-actions';
 import { makeFackeUserData } from '../../common/mocks';
 
 const fakeUserData = makeFackeUserData();
+
 describe('Reducer: user', () => {
   let state: UserProcess;
 

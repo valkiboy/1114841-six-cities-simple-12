@@ -21,8 +21,8 @@ function ReviewForm({ currentOfferId }: ReviewsFormProps): JSX.Element {
   useEffect(() => {
     if (textClear === true) {
       setValue('');
+      setAssessment('0');
     }
-
   }, [textClear]);
 
   const textareaChangeHandler = (event: React.ChangeEvent<HTMLTextAreaElement>): void => {
@@ -53,13 +53,25 @@ function ReviewForm({ currentOfferId }: ReviewsFormProps): JSX.Element {
 
   const titles: string[] = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
 
+  // TODO строка для линтера
+  // eslint-disable-next-line
+  // console.log('Number(assessment)', Number(assessment))
+
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit} >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         {titles.map((title, index) => (
           <Fragment key={title}>
-            <input onChange={assessmentChangeHandler} className="form__rating-input visually-hidden" name="rating" value={titles.length - index} id={`${titles.length - index}-stars`} type="radio" disabled={isLoading} />
+            <input
+              onChange={assessmentChangeHandler}
+              className="form__rating-input visually-hidden"
+              name="rating"
+              value={titles.length - index}
+              id={`${titles.length - index}-stars`}
+              checked={assessment === `${titles.length - index}`}
+              type="radio" disabled={isLoading}
+            />
             <label htmlFor={`${titles.length - index}-stars`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width="37" height="33">
                 <use xlinkHref="#icon-star"></use>

@@ -10,3 +10,10 @@ export type Review = {
     name: string;
   };
 }
+
+export type NewReview = {
+  offerId: number;
+  comment: string;
+  rating: number;
+};
+

@@ -53,10 +53,6 @@ function ReviewForm({ currentOfferId }: ReviewsFormProps): JSX.Element {
 
   const titles: string[] = ['perfect', 'good', 'not bad', 'badly', 'terribly'];
 
-  // TODO строка для линтера
-  // eslint-disable-next-line
-  // console.log('Number(assessment)', Number(assessment))
-
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmit} >
       <label className="reviews__label form__label" htmlFor="review">Your review</label>

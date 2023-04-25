@@ -1,5 +1,6 @@
 import { Helmet } from 'react-helmet-async';
-import s from './not-found-page.module.css';
+// import s from './page-not-found.module.css';
+import s from './page-not-found.module.css';
 import { Link } from 'react-router-dom';
 
 function PageNotFound(): JSX.Element {

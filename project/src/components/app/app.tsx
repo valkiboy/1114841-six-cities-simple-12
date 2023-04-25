@@ -5,7 +5,7 @@ import { AppRoute, AuthorizationStatus } from '../../common/const';
 import MainPage from '../../pages/main-page/main-page';
 import RoomPage from '../../pages/room-page/room-page';
 import LoginPage from '../../pages/login-page/login-page';
-import PageNotFound from '../../pages/not-found-page/not-found-page';
+import PageNotFound from '../../pages/page-not-found/page-not-found';
 import ScrollToTop from '../scrool-to-top/scrool-to-top';
 import LoadingScreen from '../../pages/loading-screen/loading-screen';
 import HistoryRouter from '../history-router/history-router';

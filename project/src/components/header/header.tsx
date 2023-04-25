@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Logo from '../logo/logo';
-import { AuthorizationStatus } from '../../common/const';
+import { AppRoute, AuthorizationStatus } from '../../common/const';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { logoutAction } from '../../store/api-actions';
 import { getAuthorizationStatus, getUserData } from '../../store/user-process/user-process.selectors';
@@ -60,7 +60,7 @@ function Header(): JSX.Element {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <Link to={'/'} className="header__nav-link header__nav-link--profile" >
+                  <Link to={AppRoute.Login} className="header__nav-link header__nav-link--profile" >
                     <div className="header__avatar-wrapper user__avatar-wrapper"></div>
                     <span className="header__login">Sign in</span>
                   </Link>

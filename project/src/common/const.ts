@@ -51,3 +51,18 @@ export const DEFAULT_SORT_TYPE = SortTypes.Popular;
 export const MAX_NUMBER_REVIEWS = 10;
 export const MAX_NUMBER_IMAGE = 6;
 export const REGEX = (/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{2,}$/);
+
+export const shuffle = (items: string[]) => {
+  let currentIndex = items.length, temporaryValue, randomIndex;
+
+  while (currentIndex) {
+
+    randomIndex = Math.floor(Math.random() * currentIndex--);
+
+    temporaryValue = items[currentIndex];
+    items[currentIndex] = items[randomIndex];
+    items[randomIndex] = temporaryValue;
+  }
+
+  return items;
+};

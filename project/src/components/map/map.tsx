@@ -38,9 +38,7 @@ function Map({ offers, city, activeItem, classNaming }: MapProps): JSX.Element {
 
     if (map) {
 
-      // смещает центр карты
       map.panTo([city.location.latitude, city.location.longitude]);
-
 
       offers.forEach((offer) => {
         const marker = new Marker({

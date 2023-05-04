@@ -33,7 +33,7 @@ function App(): JSX.Element {
 
   return (
     <HelmetProvider>
-      <HistoryRouter history={browserHistory}>
+      <HistoryRouter history={browserHistory} basename={process.env.PUBLIC_URL}>
         <ScrollToTop />
         <Routes>
           <Route
